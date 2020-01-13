@@ -1,0 +1,23 @@
+{
+  "name": "ianmovies",
+  "version": "1.0.0",
+  "description": "An application that displays a movies catalogue",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianlcz/ianMovies.git"
+  },
+  "author": "Yann Le Coz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ianlcz/ianMovies/issues"
+  },
+  "homepage": "https://github.com/ianlcz/ianMovies#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^7.1.9"
+  }
+}
