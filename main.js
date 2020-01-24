@@ -9,6 +9,9 @@ let mainWindow;
 function createWindow() {
   // Création de la fenêtre du navigateur
   mainWindow = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    backgroundColor: "#2E2C29",
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
