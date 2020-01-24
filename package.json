@@ -16,7 +16,9 @@
     "url": "https://github.com/ianlcz/ianMovies/issues"
   },
   "homepage": "https://github.com/ianlcz/ianMovies#readme",
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
   "devDependencies": {
     "electron": "^7.1.9"
   }

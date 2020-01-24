@@ -1,5 +1,6 @@
 const electron = require('electron')
-const { app, BrowserWindow, Menu} = require('electron')
+const path = require('path')
+const { app, BrowserWindow, Menu } = require('electron')
 
 process.env.NODE_ENV = 'development';
 
@@ -9,6 +10,7 @@ function createWindow() {
   // Création de la fenêtre du navigateur
   mainWindow = new BrowserWindow({
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
     }
   })
