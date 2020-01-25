@@ -1,6 +1,8 @@
-html
+@font-face
 {
-    height: 100%;
+    font-family: Righteous;
+    src: local("Righteous"), url("./fonts/Righteous/Righteous-Regular.ttf");
+    font-weight: normal;
 }
 
 body
@@ -13,22 +15,38 @@ img#poster
     width: 20%;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0px 0px 4px rgb(0, 0, 0, 0.7);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6);
     transition-duration: 400ms;
 }
 img#poster:hover
 {
     width: 24%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
 }
 
 @media screen and (min-height: 900px)
 {
     img#poster
     {
-        width: 14%;
+        width: 12%;
     }
     img#poster:hover
     {
-        width: 18%;
+        width: 16%;
     }
 }
+
+footer
+{
+    position: fixed;
+    margin-bottom: 0.2%;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    font-family: 'Righteous';
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
