@@ -16,10 +16,10 @@
     "url": "https://github.com/ianlcz/ianMovies/issues"
   },
   "homepage": "https://github.com/ianlcz/ianMovies#readme",
-  "dependencies": {
-    "jquery": "^3.4.1"
-  },
   "devDependencies": {
     "electron": "^7.1.9"
+  },
+  "dependencies": {
+    "home-path": "^1.0.7"
   }
 }

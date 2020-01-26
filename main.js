@@ -9,7 +9,7 @@ let mainWindow;
 function createWindow() {
   // Création de la fenêtre du navigateur
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600,
     backgroundColor: "#2E2C29",
     webPreferences: {
