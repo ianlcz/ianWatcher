@@ -10,7 +10,7 @@ body
     position: relative;
     min-height: 100vh;
     margin: 0;
-    background: radial-gradient(#0b366d, #061c3a) no-repeat;
+    background: radial-gradient(#0b366d 24%, #061c3a) no-repeat;
 }
 
 #movieArea
@@ -36,16 +36,10 @@ img.poster:hover
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 1000px) {
-    #movieArea
-{
-    grid-template-columns: repeat(4, 1fr);
+#backdrop{
+    box-shadow:inset 0 0 0 100vh rgba(96, 136, 188, 0.80);
+    background-size: cover;
 }
-    img.poster
-    {
-        height: 300px;
-    }
-  }
 
 footer
 {
@@ -61,3 +55,13 @@ footer
     text-align: center;
 }
 
+@media screen and (max-width: 1000px) {
+    #movieArea
+    {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    img.poster
+    {
+        height: 330px;
+    }
+}

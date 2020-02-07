@@ -1,9 +1,14 @@
-import APIKEY from "./key.js"
-
-const axios = require('axios')
 const fs = require('fs')
 const $HOME = require('home-path')
 const movieArea = document.getElementById('movieArea')
+
+const axios = require('axios')
+const lang = "fr-FR"
+
+export default axios.defaults.baseURL = 'https://api.themoviedb.org/3'
+const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZWVjYTNlYjkzNGM1OTVhMzJjYmQ1M2ExNmY3NmY2NCIsInN1YiI6IjVlMTRiMjQ0NTkwN2RlMDAxN2UzNTBmZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3rgVxb3NRcm21JOCMa03Ic6_wHsM4-9m_u6YjxfDcxc"
+axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 
 const compareValues = (key, order = 'asc') => {
     return (a, b) => {
@@ -28,7 +33,7 @@ fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
 
             if (filename) {
                 axios
-                    .get(`https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${encodeURI(filename)}&language=fr-FR`)
+                    .get(`/search/movie?query=${encodeURI(filename)}&language=${lang}`)
                     .then(response => {
                         let movieLink = document.createElement('a')
                         let moviePoster = document.createElement('img')
