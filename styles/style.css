@@ -1,20 +1,33 @@
-@font-face
-{
+@font-face {
     font-family: Righteous;
     src: local("Righteous"), url("../fonts/Righteous/Righteous-Regular.ttf");
     font-weight: normal;
 }
 
-body
-{
+@font-face {
+    font-family: Ubuntu Bold;
+    src: local("Ubuntu Bold"), url("../fonts/Ubuntu/Ubuntu-Bold.ttf");
+}
+
+@font-face {
+    font-family: Ubuntu Medium;
+    src: local("Ubuntu Medium"), url("../fonts/Ubuntu/Ubuntu-Medium.ttf");
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: local("Ubuntu"), url("../fonts/Ubuntu/Ubuntu-Regular.ttf");
+}
+
+body {
     position: relative;
     min-height: 100vh;
     margin: 0;
     background: radial-gradient(#0b366d 24%, #061c3a) no-repeat;
+    color: #0B366D;
 }
 
-#movieArea
-{
+#movieArea {
     display: grid;
     padding: 2em;
     grid-template-columns: repeat(8, 1fr);
@@ -22,8 +35,7 @@ body
     column-gap: 1.6em;
 }
 
-img.poster
-{
+img.poster {
     width: 100%;
     height: 240px;
     border-radius: 10px;
@@ -31,18 +43,101 @@ img.poster
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
     transition-duration: 600ms;
 }
-img.poster:hover
-{
+
+img.poster:hover {
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.5);
 }
 
-#backdrop{
-    box-shadow:inset 0 0 0 100vh rgba(96, 136, 188, 0.80);
+#backdrop {
+    display: flex;
+    box-shadow: inset 0 0 0 100vh rgba(96, 136, 188, 0.80);
     background-size: cover;
 }
 
-footer
-{
+#poster {
+    /* border: 2px dashed white; */
+    margin: 28px;
+    width: 38%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+#movie-infos {
+    /* border: 2px dashed white; */
+    width: 100%;
+}
+
+h1 {
+    /* border: 2px dashed white; */
+    display: block;
+    margin-top: 40px;
+    text-align: center;
+}
+
+#title {
+    margin-right: 0.4em;
+    font-family: 'Ubuntu Bold';
+    line-height: 1em;
+    font-size: 40px;
+}
+
+#release_date {
+    font-family: 'Righteous';
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+h3 {}
+
+#genres {
+    /* border: 2px dashed white; */
+    font-family: 'Ubuntu Medium';
+}
+
+#productions {
+    /* border: 2px dashed white; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navigation {
+    /* border: 2px dashed white; */
+    position: relative;
+    padding-right: 40px;
+    width: 10%;
+}
+
+#navigation a {
+    /* border: 2px dashed white; */
+    display: block;
+    position: absolute;
+    top: 50%;
+    /* poussé de la moitié de hauteur de viewport */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* tiré de la moitié de sa propre hauteur */
+    margin: 0 auto;
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    background: rgba(11, 54, 109, 0.74);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+#navigation a,
+i {
+    position: absolute;
+    top: 50%;
+    /* poussé de la moitié de hauteur de viewport */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* tiré de la moitié de sa propre hauteur */
+    text-align: center;
+    color: #E5E5E5;
+}
+
+footer {
     position: absolute;
     padding-bottom: 0.2%;
     left: 0;
@@ -56,12 +151,15 @@ footer
 }
 
 @media screen and (max-width: 1000px) {
-    #movieArea
-    {
+    #movieArea {
         grid-template-columns: repeat(4, 1fr);
     }
-    img.poster
-    {
+
+    img.poster {
         height: 330px;
+    }
+
+    #poster {
+        width: 34%;
     }
 }

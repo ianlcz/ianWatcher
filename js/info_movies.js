@@ -13,8 +13,26 @@ axios
     .get(`/movie/${movieID}?language=${lang}`)
     .then(response => {
         const data = response.data
-        document.title = `ianMovie | ${data.title}`
+        const picture = document.createElement("img")
+        let productionIndex = 0
+
+        document.title = `ianMovies | ${data.title}`
+
         Helpers.id("backdrop").style.backgroundImage = `url(${Helpers.imageUrl(data.backdrop_path)})`
         Helpers.id("backdrop").style.backgroundColor = `#6088BC`
+        Helpers.id("poster").src = Helpers.imageUrl(data.poster_path)
+        Helpers.id("poster").alt = `Affiche du film: ${data.title}`
+        Helpers.remplirElement('title', data.title)
+        Helpers.remplirElement('release_date', `(${data.release_date.split('-')[0]})`)
+        Helpers.remplirElement('genres', data.genres.map(item => item.name).join(', '))
+        
+        while (!data.production_companies[productionIndex].logo_path) {
+            productionIndex += 1
+        }
+
+        picture.src = Helpers.imageUrl(data.production_companies[productionIndex].logo_path)
+        picture.alt = `Logo de ${data.production_companies[productionIndex].name}`
+        picture.style.height = "30px"
+        Helpers.id("productions").appendChild(picture)
     })
     .catch(error => console.error(error))
