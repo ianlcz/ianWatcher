@@ -1,31 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>ianMovies</title>
-        <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"/>
-        <script type="module" src="../js/info_movies.js"></script>
-    </head>
-    <body id="backdrop">
-        <img src="https://www.flixdetective.com/web/images/poster-placeholder.png" alt="movie" id="poster">
-        <div id="movie-infos">
-            <h1><span id="title">Nom</span><span id="release_date">Année</span></h1>
-            <h3 id="genres">Genre(s)</h2>
-            <div id="productions"></div>
-        </div>
-        
-        <div id="navigation">
-            <a href="../index.html" alt="Bouton d'Accueil" title="Revenir à l'Accueil"><i class="fas fa-home fa-lg"></i></a>
-        </div>
-        <footer>
-            Copyright <span style="font-family: Arial;font-weight: bold;">&copy;</span>
-            <script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ianMovies</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <script type="module" src="../js/info_movies.js"></script>
+</head>
+
+<body id="backdrop">
+    <img src="" alt="movie" id="poster" class="floatable">
+    <div id="movie-infos">
+        <h1><span id="title">Nom</span><span id="release_date">Année</span></h1>
+        <img id="production">
+        <h3 id="genres">Genre(s)</h3>
+        <h3 id="director">Réalisé par <span id="director_name">Réalisateur</span></h3>
+        <table id="table">
+            <tr>
+                <th>Durée</th>
+                <th>Score</th>
+                <th>Budget</th>
+                <th>Revenus</th>
+            </tr>
+
+            <tr>
+                <td id="runtime">Durée</td>
+                <td id="marks">
+                    <span id="vote_average">Moyenne</span> (<span id="vote_count">Nb</span> votes)
+                </td>
+                <td id="budget">XM €</td>
+                <td id="revenue">XM €</td>
+            </tr>
+        </table>
+        <h2>Synopsis</h2>
+        <p id="overview">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nesciunt neque ea obcaecati,
+            ducimus delectus labore voluptatum vel porro soluta quasi maiores reiciendis mollitia rerum. Nesciunt iure
+            modi illo incidunt!
+        </p>
+    </div>
+
+    <div id="navigation">
+        <a href="../index.html" alt="Bouton d'Accueil" title="Revenir à l'Accueil"><i class="fas fa-home fa-lg"></i></a>
+    </div>
+    <footer>
+        Copyright <span style="font-family: Arial;font-weight: bold;">&copy;</span>
+        <script>
             document.write(' ' + new Date().getFullYear() + " ianDev")
-            </script>
-        </footer>
-        <script src="../renderer.js"></script>
-    </body>
+        </script>
+    </footer>
+    <script src="../renderer.js"></script>
+</body>
+
 </html>

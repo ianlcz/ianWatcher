@@ -1,12 +1,16 @@
 const electron = require('electron')
 const path = require('path')
-const { app, BrowserWindow, Menu } = require('electron')
+const {
+  app,
+  BrowserWindow,
+  Menu
+} = require('electron')
 
 process.env.NODE_ENV = 'development';
 
 let mainWindow;
 
-function createWindow() {
+let createWindow = () => {
   // Création de la fenêtre du navigateur
   mainWindow = new BrowserWindow({
     width: 1000,
@@ -50,34 +54,29 @@ app.on('activate', () => {
 })
 
 // Création du modèle de menu
-const modelMenu =  [
-  {
-    label: 'File',
-    submenu:[
-      {
-        label: "Quitter l'application",
-        accelerator:process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
-        click(){
-          app.quit();
-        }
-      }
-    ]
-  }
-];
+const modelMenu = [{
+  label: 'File',
+  submenu: [{
+    label: "Quitter l'application",
+    accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+    click() {
+      app.quit();
+    }
+  }]
+}];
 
 // Ajout des outils de développement si on développe l'application
-if(process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV !== 'production') {
   modelMenu.push({
     label: 'Développement',
-    submenu:[
-      {
+    submenu: [{
         label: 'Rafraîchir',
         role: 'reload'
       },
       {
         label: 'Inspecter les éléments',
-        accelerator:process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
-        click(item, focusedWindow){
+        accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+        click(item, focusedWindow) {
           focusedWindow.toggleDevTools();
         }
       }

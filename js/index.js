@@ -10,6 +10,10 @@ const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZWVjYTNlYjkzNGM1OTVhMzJjYmQ
 axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 
+const rewrite_movies_title = string => {
+    return encodeURIComponent(string.replace(/[:,]/g, '').replace(/  /g, ' ').replace('œ', 'oe').replace(/[^a-zA-Z0-9-' ]/g, '')).replace(/\'/g, "%27").toUpperCase()
+}
+
 const compareValues = (key, order = 'asc') => {
     return (a, b) => {
         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
@@ -26,24 +30,25 @@ const compareValues = (key, order = 'asc') => {
 
 fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
     if (!files.length) {
-        console.log("Le dossier est vide !")
+        alert("Le dossier est vide !")
     } else {
         files.forEach(file => {
             let filename = file.split('.')[0]
 
+
             if (filename) {
                 axios
-                    .get(`/search/movie?query=${encodeURI(filename)}&language=${lang}`)
+                    .get(`/search/movie?language=${lang}&query=${rewrite_movies_title(filename)}`)
                     .then(response => {
-                        let movieLink = document.createElement('a')
-                        let moviePoster = document.createElement('img')
+                        const movieLink = document.createElement('a')
+                        const moviePoster = document.createElement('img')
 
                         response.data.results.sort(compareValues('popularity'))
                         response.data.results.forEach(movie => {
-                            if (filename.toUpperCase() === movie.original_title.replace(/(:|,)/g, '').replace(/  /g, ' ').toUpperCase() || filename.toUpperCase() === movie.title.replace(/(:|,)/g, '').replace(/  /g, ' ').toUpperCase()) {
+                            if (rewrite_movies_title(filename) === rewrite_movies_title(movie.original_title) || rewrite_movies_title(filename) === rewrite_movies_title(movie.title)) {
                                 movieLink.href = `./html/detail.html?id=${movie.id}`
                                 moviePoster.src = `https://image.tmdb.org/t/p/original${movie.poster_path}`
-                                moviePoster.alt = "Affiche de " + movie.title
+                                moviePoster.alt = `Affiche de ${movie.title}`
                                 moviePoster.title = movie.overview
                                 moviePoster.className = 'poster'
                                 movieArea.appendChild(movieLink)
