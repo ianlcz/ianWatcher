@@ -29,8 +29,6 @@ numeral.register('locale', 'fr', {
 })
 numeral.locale('fr')
 
-Helpers.scrollingElement("poster")
-
 axios
     .get(`/movie/${movieID}?language=${lang}`)
     .then(response => {
@@ -53,6 +51,7 @@ axios
 
         Helpers.id("production").src = Helpers.imageUrl(data.production_companies[productionIndex].logo_path)
         Helpers.id("production").alt = `Logo de ${data.production_companies[productionIndex].name}`
+
         if (data.runtime && data.vote_average && data.vote_count && data.budget && data.revenue) {
             Helpers.remplirElement("runtime", Helpers.formatRuntime(data.runtime))
             Helpers.remplirElement("vote_average", `${data.vote_average * 10}%`)
@@ -62,7 +61,14 @@ axios
         } else {
             Helpers.id("table").style.display = "none"
         }
-        Helpers.remplirElement("overview", data.overview)
+
+        if (data.overview) {
+            Helpers.remplirElement("overview", data.overview)
+        } else {
+            Helpers.id("head_overview").style.display = "none"
+            Helpers.id("overview").style.display = "none"
+        }
+
     })
     .catch(error => console.error(error))
 
@@ -78,6 +84,28 @@ axios
             }
         })
 
-        Helpers.remplirElement('director_name', `${l_director.map(item => item.name).join(' et ')}`)
+        Helpers.remplirElement('director_name', l_director.length !== 0 ? `${l_director.map(item => item.name).join(' et ')}` : Helpers.id("director").style.display = "none")
+    })
+    .catch(error => console.error(error))
+
+axios
+    .get(`/movie/${movieID}/videos?language=${lang}`)
+    .then(response => {
+        const data = response.data
+        let l_trailer = []
+
+        data.results.map(item => {
+            if (item.type === "Trailer" && item.site === "YouTube" && item.name.includes('VF')) {
+                l_trailer.push(item)
+            }
+        })
+
+        if (l_trailer.length !== 0) {
+            Helpers.id("body_trailer").src = `https://www.youtube.com/embed/${l_trailer[0].key}`
+            Helpers.id("body_trailer").title = l_trailer[0].name
+        } else {
+            Helpers.id("head_trailer").style.display = "none"
+            Helpers.id("body_trailer").style.display = "none"
+        }
     })
     .catch(error => console.error(error))
