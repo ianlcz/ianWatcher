@@ -3,7 +3,8 @@ const Helpers = {
         const param = new URLSearchParams(document.location.search)
         return param.get(name)
     },
-    id: id => document.getElementById(id),
+    id: id => document.querySelector(`#${id}`),
+    class: className => document.querySelector(`.${className}`),
     remplirElement: (id, text) => {
         document.getElementById(id).innerText = text
     },

@@ -37,8 +37,8 @@ axios
 
         document.title = `ianWatcher | ${data.title}`
 
-        Helpers.id("backdrop").style.backgroundImage = `url(${Helpers.imageUrl(data.backdrop_path)})`
-        Helpers.id("backdrop").style.backgroundColor = `#6088BC`
+        Helpers.class("backdrop").style.backgroundImage = `url(${Helpers.imageUrl(data.backdrop_path)})`
+        Helpers.class("backdrop").style.backgroundColor = `#6088BC`
         Helpers.id("poster").src = Helpers.imageUrl(data.poster_path)
         Helpers.id("poster").alt = `Affiche du film: ${data.title}`
         Helpers.remplirElement('title', data.title)

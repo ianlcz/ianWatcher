@@ -1,6 +1,6 @@
 const fs = require('fs')
 const $HOME = require('home-path')
-const movieArea = document.getElementById('movieArea')
+const movieGrid = document.getElementById('movieGrid')
 
 const axios = require('axios')
 const lang = "fr-FR"
@@ -51,7 +51,7 @@ fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
                                 moviePoster.alt = `Affiche de ${movie.title}`
                                 moviePoster.title = movie.overview
                                 moviePoster.className = 'poster'
-                                movieArea.appendChild(movieLink)
+                                movieGrid.appendChild(movieLink)
                                 movieLink.appendChild(moviePoster)
                             }
                         })

@@ -1,5 +1,5 @@
 {
-  "name": "ianmovies",
+  "name": "ianwatcher",
   "version": "1.0.0",
   "description": "An application that displays a movies catalogue",
   "main": "main.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ianlcz/ianMovies.git"
+    "url": "git+https://github.com/ianlcz/ianWatcher.git"
   },
   "author": "Yann Le Coz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ianlcz/ianMovies/issues"
+    "url": "https://github.com/ianlcz/ianWatcher/issues"
   },
-  "homepage": "https://github.com/ianlcz/ianMovies#readme",
+  "homepage": "https://github.com/ianlcz/ianWatcher#readme",
   "devDependencies": {
     "electron": "^7.1.9"
   },
