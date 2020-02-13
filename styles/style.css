@@ -22,6 +22,7 @@
 body {
     position: relative;
     margin: 0;
+    padding: 0;
     min-height: 100vh;
     font-family: 'Ubuntu';
     background: radial-gradient(#0b366d 24%, #061c3a) no-repeat;
@@ -57,13 +58,14 @@ img.poster:hover {
     display: flex;
     box-shadow: inset 0 0 0 100vh rgba(96, 136, 188, 0.84);
     background-size: cover;
+    background-position: center;
 }
 
 #poster {
     /* border: 2px dashed white; */
     margin: 28px;
     width: 38%;
-    height: 90vh;
+    height: 93.5vh;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 }
@@ -71,15 +73,13 @@ img.poster:hover {
 #movie-infos {
     /* border: 2px dashed white; */
     position: static;
-    margin-left: 42%;
-    margin-right: 4px;
+    margin: 1.6em 1em 1.6em 42%;
     width: 100%;
 }
 
 h1 {
     /* border: 2px dashed white; */
     display: block;
-    margin-top: 1.6em;
     text-align: center;
 }
 
@@ -121,7 +121,7 @@ table {
     background-color: rgba(255, 255, 255, 0.8);
     color: #0B366D;
     border-radius: 50px;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
 }
 
 th {
@@ -132,6 +132,20 @@ th {
 td {
     text-align: center;
     font-size: medium;
+}
+
+#vote_average {
+    font-family: 'Righteous';
+}
+
+#vote_count,
+#benefits {
+    margin-left: 0.6em;
+}
+
+#benefits {
+    font-family: 'Righteous';
+    color: #0B6D36;
 }
 
 h2 {
@@ -149,9 +163,29 @@ h2 {
     text-align: justify;
 }
 
+#head_distribution {
+    margin: 0;
+}
+
+#body_distribution {
+    /* border: 2px dashed white; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0.6em 0;
+    padding: 1em;
+    row-gap: 1em;
+    column-gap: 1em;
+}
+
+#actor {
+    width: 100%;
+    height: 240px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
 #trailer {
     /* border: 2px dashed white; */
-    margin-top: 2em;
 }
 
 #head_trailer {
@@ -161,7 +195,7 @@ h2 {
 
 #body_trailer {
     padding: 0.4em;
-    width: 100%;
+    width: 98%;
     height: 420px;
     border-radius: 30px;
     box-shadow: inset 0px 0px 16px rgba(0, 0, 0, 0.25);
@@ -175,7 +209,7 @@ h2 {
     width: 10%;
 }
 
-#navigation a {
+#homeButton {
     /* border: 2px dashed white; */
     display: block;
     margin: 0 auto;
@@ -186,8 +220,8 @@ h2 {
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.25);
 }
 
-#navigation a,
-i {
+#homeButton,
+#navigation i {
     position: absolute;
     top: 50%;
     /* poussé de la moitié de hauteur de viewport */
@@ -199,6 +233,7 @@ i {
 }
 
 footer {
+    /* border: 2px dashed white; */
     position: absolute;
     padding-bottom: 0.2%;
     left: 0;
@@ -222,6 +257,7 @@ footer {
 
     #poster {
         width: 34%;
+        height: 90vh;
     }
 
     #movie-infos {
@@ -230,6 +266,14 @@ footer {
     }
 
     #body_trailer {
-        height: 340px;
+        height: 339px;
+    }
+
+    #body_distribution {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    #actor {
+        height: 160px;
     }
 }

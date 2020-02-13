@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ianMovies</title>
+    <title>ianWatcher</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
     <script type="module" src="../js/info_movies.js"></script>
@@ -23,16 +23,16 @@
                 <th>Durée</th>
                 <th>Score</th>
                 <th>Budget</th>
-                <th>Revenus</th>
+                <th>Revenu</th>
             </tr>
 
             <tr>
                 <td id="runtime">Durée</td>
                 <td id="marks">
-                    <span id="vote_average">Moyenne</span> (<span id="vote_count">Nb</span> votes)
+                    <span id="vote_average">Moyenne</span><span id="vote_count">Nb</span>
                 </td>
                 <td id="budget">XM €</td>
-                <td id="revenue">XM €</td>
+                <td id="revenue"><span id="revenue_value">XM €</span><span id="benefits">(X%)</span></td>
             </tr>
         </table>
         <h2 id="head_overview">Synopsis</h2>
@@ -41,6 +41,10 @@
             ducimus delectus labore voluptatum vel porro soluta quasi maiores reiciendis mollitia rerum. Nesciunt iure
             modi illo incidunt!
         </p>
+        <div id="distribution">
+            <h2 id="head_distribution">Tête d'affiche</h2>
+            <div id="body_distribution"></div>
+        </div>
         <div id="trailer">
             <h2 id="head_trailer">Bande-annonce</h2>
             <iframe id="body_trailer" frameborder=0></iframe>

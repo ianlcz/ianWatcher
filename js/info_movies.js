@@ -35,14 +35,14 @@ axios
         const data = response.data
         let productionIndex = 0
 
-        document.title = `ianMovies | ${data.title}`
+        document.title = `ianWatcher | ${data.title}`
 
         Helpers.id("backdrop").style.backgroundImage = `url(${Helpers.imageUrl(data.backdrop_path)})`
         Helpers.id("backdrop").style.backgroundColor = `#6088BC`
         Helpers.id("poster").src = Helpers.imageUrl(data.poster_path)
         Helpers.id("poster").alt = `Affiche du film: ${data.title}`
         Helpers.remplirElement('title', data.title)
-        Helpers.remplirElement('release_date', `(${data.release_date.split('-')[0]})`)
+        Helpers.remplirElement('release_date', `(${new Date(data.release_date).getFullYear()})`)
         Helpers.remplirElement('genres', data.genres.map(item => item.name).join(', '))
 
         while (!data.production_companies[productionIndex].logo_path) {
@@ -54,10 +54,18 @@ axios
 
         if (data.runtime && data.vote_average && data.vote_count && data.budget && data.revenue) {
             Helpers.remplirElement("runtime", Helpers.formatRuntime(data.runtime))
-            Helpers.remplirElement("vote_average", `${data.vote_average * 10}%`)
-            Helpers.remplirElement("vote_count", numeral(data.vote_count).format('0a'))
+            Helpers.remplirElement("vote_average", `${data.vote_average * 10} %`)
+            Helpers.remplirElement("vote_count", `(${numeral(data.vote_count).format('0a')} votes)`)
             Helpers.remplirElement("budget", `${numeral(data.budget * 0.91).format('0a')} €`)
-            Helpers.remplirElement("revenue", `${numeral(data.revenue * 0.91).format('0a')} €`)
+            Helpers.remplirElement("revenue_value", `${numeral(data.revenue * 0.91).format('0a')} €`)
+            Helpers.remplirElement("benefits", Helpers.calculRate(data.budget, data.revenue) > 0 ? `(+${Helpers.calculRate(data.budget, data.revenue)} %)` : `(${Helpers.calculRate(data.budget, data.revenue)} %)`)
+
+            if (Helpers.calculRate(data.budget, data.revenue) < 100) {
+                Helpers.id("benefits").style.color = "#6D6D36"
+            }
+            if (Helpers.calculRate(data.budget, data.revenue) < 50) {
+                Helpers.id("benefits").style.color = "#6D0B36"
+            }
         } else {
             Helpers.id("table").style.display = "none"
         }
@@ -77,14 +85,30 @@ axios
     .then(response => {
         const data = response.data
         let l_director = []
+        let l_actor = []
 
+        /* On recherche le ou les réalisateurs du film */
         data.crew.map(item => {
             if (item.department === 'Directing' && item.job === 'Director') {
                 l_director.push(item)
             }
         })
+        Helpers.remplirElement('director_name', l_director.length !== 0 ? l_director.map(item => item.name).join(' et ') : Helpers.id("director").style.display = "none")
 
-        Helpers.remplirElement('director_name', l_director.length !== 0 ? `${l_director.map(item => item.name).join(' et ')}` : Helpers.id("director").style.display = "none")
+        /* On ajoute le casting */
+        data.cast.map(item => {
+            if (item.profile_path) {
+                l_actor.push(item)
+            }
+        })
+
+        for (let actorIndex = 0; actorIndex < 8; actorIndex++) {
+            let actorPicture = document.createElement("img")
+            actorPicture.src = Helpers.imageUrl(l_actor[actorIndex].profile_path)
+            actorPicture.alt = `Image de ${l_actor[actorIndex].name}`
+            actorPicture.id = "actor"
+            Helpers.id("body_distribution").appendChild(actorPicture)
+        }
     })
     .catch(error => console.error(error))
 
@@ -93,6 +117,7 @@ axios
     .then(response => {
         const data = response.data
         let l_trailer = []
+        let v_trailer = ''
 
         data.results.map(item => {
             if (item.type === "Trailer" && item.site === "YouTube" && item.name.includes('VF')) {
@@ -101,8 +126,9 @@ axios
         })
 
         if (l_trailer.length !== 0) {
-            Helpers.id("body_trailer").src = `https://www.youtube.com/embed/${l_trailer[0].key}`
-            Helpers.id("body_trailer").title = l_trailer[0].name
+            v_trailer = l_trailer[Math.floor(Math.random() * Math.floor(l_trailer.length))]
+            Helpers.id("body_trailer").src = `https://www.youtube.com/embed/${v_trailer.key}`
+            Helpers.id("body_trailer").title = v_trailer.name
         } else {
             Helpers.id("head_trailer").style.display = "none"
             Helpers.id("body_trailer").style.display = "none"

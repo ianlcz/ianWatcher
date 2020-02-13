@@ -14,6 +14,9 @@ const Helpers = {
         if (nbHours === 0) return `${nbMinutes} min`
         else return `${nbHours} h ${nbMinutes.toString().padStart(2, "0")} min`
     },
+    calculRate: (budget, revenue) => {
+        return Math.round((revenue / budget - 1) * 100)
+    },
     scrollingElement: element => {
         window.scroll(() => {
             window.scrollTop() >= Helpers.id(element).offsetTop ? Helpers.id(element).addClass("floatable") : Helpers.id(element).removeClass("floatable")
