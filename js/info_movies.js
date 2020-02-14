@@ -52,13 +52,19 @@ axios
         Helpers.id("production").src = Helpers.imageUrl(data.production_companies[productionIndex].logo_path)
         Helpers.id("production").alt = `Logo de ${data.production_companies[productionIndex].name}`
 
-        if (data.runtime && data.vote_average && data.vote_count && data.budget && data.revenue) {
-            Helpers.remplirElement("runtime", Helpers.formatRuntime(data.runtime))
-            Helpers.remplirElement("vote_average", `${data.vote_average * 10} %`)
+        if (data.runtime && data.vote_average && data.budget && data.revenue) {
+            Helpers.remplirElement("runtime", data.runtime ? Helpers.formatRuntime(data.runtime) : "Aucune")
+            Helpers.remplirElement("vote_average", data.vote_average ? `${data.vote_average * 10} %` : "Aucun")
             Helpers.remplirElement("vote_count", `(${numeral(data.vote_count).format('0a')} votes)`)
-            Helpers.remplirElement("budget", `${numeral(data.budget * 0.91).format('0a')} €`)
+            if (data.budget) {
+                Helpers.remplirElement("budget_value", `${numeral(data.budget * 0.91).format('0a')} €`)
+                Helpers.remplirElement("benefits", Helpers.calculRate(data.budget, data.revenue) > 0 ? `(+${Helpers.calculRate(data.budget, data.revenue)} %)` : `(${Helpers.calculRate(data.budget, data.revenue)} %)`)
+            } else {
+                Helpers.id("budget").style.display = "none"
+                Helpers.id("budget_value").style.display = "none"
+                Helpers.id("benefits").style.display = "none"
+            }
             Helpers.remplirElement("revenue_value", `${numeral(data.revenue * 0.91).format('0a')} €`)
-            Helpers.remplirElement("benefits", Helpers.calculRate(data.budget, data.revenue) > 0 ? `(+${Helpers.calculRate(data.budget, data.revenue)} %)` : `(${Helpers.calculRate(data.budget, data.revenue)} %)`)
 
             if (Helpers.calculRate(data.budget, data.revenue) < 100) {
                 Helpers.id("benefits").style.color = "#6D6D36"
@@ -69,6 +75,7 @@ axios
         } else {
             Helpers.id("table").style.display = "none"
         }
+
 
         if (data.overview) {
             Helpers.remplirElement("overview", data.overview)
@@ -103,11 +110,25 @@ axios
         })
 
         for (let actorIndex = 0; actorIndex < 8; actorIndex++) {
+            let actorDiv = document.createElement("div")
+            actorDiv.id = "actor_field"
             let actorPicture = document.createElement("img")
             actorPicture.src = Helpers.imageUrl(l_actor[actorIndex].profile_path)
             actorPicture.alt = `Image de ${l_actor[actorIndex].name}`
-            actorPicture.id = "actor"
-            Helpers.id("body_distribution").appendChild(actorPicture)
+            actorPicture.id = "actor_picture"
+            let actorDetail = document.createElement("div")
+            actorDetail.id = "actor_detail"
+            let actorName = document.createElement("h3")
+            actorName.innerText = l_actor[actorIndex].name
+            actorName.id = "actor_name"
+            let actorCharacter = document.createElement("p")
+            actorCharacter.innerText = l_actor[actorIndex].character
+            actorCharacter.id = "actor_character"
+            Helpers.id("body_distribution").appendChild(actorDiv)
+            actorDiv.appendChild(actorPicture)
+            actorDiv.appendChild(actorDetail)
+            actorDetail.appendChild(actorName)
+            actorDetail.appendChild(actorCharacter)
         }
     })
     .catch(error => console.error(error))

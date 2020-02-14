@@ -68,7 +68,7 @@ img.poster:hover {
     width: 38%;
     height: 93.5vh;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.40);
 }
 
 #movie-infos {
@@ -174,15 +174,43 @@ h2 {
     grid-template-columns: repeat(4, 1fr);
     margin: 0.6em 0;
     padding: 1em;
-    row-gap: 1em;
-    column-gap: 1em;
+    row-gap: 1.6em;
+    column-gap: 1.6em;
 }
 
-#actor {
-    width: 100%;
-    height: 240px;
+#actor_field {
+    /* border: 2px dashed white; */
     border-radius: 10px;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.40);
+}
+
+#actor_picture {
+    /* border: 2px dashed white; */
+    width: 100%;
+    height: 14em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#actor_detail {
+    /* border: 2px dashed white; */
+    padding: 0.6em 0.4em 0.2em 0.4em;
+    height: 4em;
+    background-color: rgb(255, 255, 255, 0.9);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#actor_name {
+    margin-top: 0.2em;
+    font-family: 'Ubuntu Medium';
+    font-size: 12px;
+    text-align: center;
+}
+
+#actor_character {
+    font-size: 12px;
+    text-align: center;
 }
 
 #trailer {
@@ -217,20 +245,29 @@ h2 {
     width: 42px;
     height: 42px;
     border-radius: 100%;
-    background: #0b366dbd;
-    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.25);
+    background: rgba(11, 54, 109, 0.9);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.40);
+    transition-duration: 2s;
 }
 
-#homeButton,
-#navigation i {
-    position: absolute;
+#homeButton:hover {
+    background: rgba(17, 74, 150, 0.9);
+}
+
+#homeButton {
     top: 50%;
     /* poussé de la moitié de hauteur de viewport */
-    left: 50%;
+    right: 0;
     transform: translate(-50%, -50%);
     /* tiré de la moitié de sa propre hauteur */
     text-align: center;
     color: #E5E5E5;
+}
+.fa-home::before{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 footer {
@@ -272,9 +309,19 @@ footer {
 
     #body_distribution {
         grid-template-columns: repeat(4, 1fr);
+        row-gap: 1em;
+        column-gap: 1em;
     }
 
-    #actor {
+    #actor_picture {
         height: 160px;
+    }
+
+    #actor_name {
+        margin-bottom: 0;
+    }
+
+    #actor_character {
+        margin-top: 4%;
     }
 }
