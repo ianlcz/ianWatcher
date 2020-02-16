@@ -1,7 +1,7 @@
 import Helpers from "./Helpers.js"
 const axios = require('axios')
 const numeral = require('numeral')
-const lang = `fr-FR`
+const lang = "fr-FR"
 const movieID = Helpers.getParam('id')
 
 export default axios.defaults.baseURL = 'https://api.themoviedb.org/3'
@@ -33,7 +33,8 @@ axios
     .get(`/movie/${movieID}?language=${lang}`)
     .then(response => {
         const data = response.data
-        let productionIndex = 0
+        let l_production = []
+        let l_mainProduction = []
 
         document.title = `ianWatcher | ${data.title}`
 
@@ -45,12 +46,31 @@ axios
         Helpers.remplirElement('release_date', `(${new Date(data.release_date).getFullYear()})`)
         Helpers.remplirElement('genres', data.genres.map(item => item.name).join(', '))
 
-        while (!data.production_companies[productionIndex].logo_path) {
-            productionIndex += 1
-        }
+        data.production_companies.map(item => {
+            if (item.logo_path) {
+                l_production.push(item)
+            }
+        })
 
-        Helpers.id("production").src = Helpers.imageUrl(data.production_companies[productionIndex].logo_path)
-        Helpers.id("production").alt = `Logo de ${data.production_companies[productionIndex].name}`
+        if (l_production.length === 0) {
+            Helpers.id("production").style.display = "none"
+        } else {
+            if (l_production[0].name.includes("Marvel Studios") || l_production[0].name.includes("Syncopy")) {
+                Helpers.id("production").src = Helpers.imageUrl(l_production[0].logo_path)
+                Helpers.id("production").alt = `Logo de ${l_production[0].name}`
+            } else {
+                let minimumIndex = l_production[0].id
+                l_production.map(item => {
+                    if (item.id <= minimumIndex) {
+                        minimumIndex = item.id
+                        l_mainProduction.pop()
+                        l_mainProduction.push(item)
+                    }
+                })
+                Helpers.id("production").src = Helpers.imageUrl(l_mainProduction[0].logo_path)
+                Helpers.id("production").alt = `Logo de ${l_mainProduction[0].name}`
+            }
+        }
 
         if (data.runtime && data.vote_average && data.budget && data.revenue) {
             Helpers.remplirElement("runtime", data.runtime ? Helpers.formatRuntime(data.runtime) : "Aucune")
@@ -76,7 +96,6 @@ axios
             Helpers.id("table").style.display = "none"
         }
 
-
         if (data.overview) {
             Helpers.remplirElement("overview", data.overview)
         } else {
@@ -92,15 +111,22 @@ axios
     .then(response => {
         const data = response.data
         let l_director = []
+        let l_composer = []
         let l_actor = []
 
-        /* On recherche le ou les réalisateurs du film */
+
         data.crew.map(item => {
+            /* On recherche le ou les réalisateurs du film */
             if (item.department === 'Directing' && item.job === 'Director') {
                 l_director.push(item)
             }
+            /* On recherche le compositeur de la bande originale */
+            if (item.department === "Sound" && item.job === "Original Music Composer") {
+                l_composer.push(item)
+            }
         })
         Helpers.remplirElement('director_name', l_director.length !== 0 ? l_director.map(item => item.name).join(' et ') : Helpers.id("director").style.display = "none")
+        Helpers.remplirElement('composer_name', l_composer.length !== 0 ? l_composer.map(item => item.name).join(' et ') : Helpers.id("composer").style.display = "none")
 
         /* On ajoute le casting */
         data.cast.map(item => {
@@ -121,14 +147,20 @@ axios
             let actorName = document.createElement("h3")
             actorName.innerText = l_actor[actorIndex].name
             actorName.id = "actor_name"
-            let actorCharacter = document.createElement("p")
-            actorCharacter.innerText = l_actor[actorIndex].character
-            actorCharacter.id = "actor_character"
             Helpers.id("body_distribution").appendChild(actorDiv)
             actorDiv.appendChild(actorPicture)
             actorDiv.appendChild(actorDetail)
             actorDetail.appendChild(actorName)
-            actorDetail.appendChild(actorCharacter)
+
+            if (l_actor[actorIndex].character) {
+                let actorCharacter = document.createElement("p")
+                actorCharacter.innerText = l_actor[actorIndex].character
+                actorCharacter.id = "actor_character"
+                Helpers.id("body_distribution").appendChild(actorDiv)
+                actorDetail.appendChild(actorCharacter)
+            } else {
+                actorDetail.style.height = "2em"
+            }
         }
     })
     .catch(error => console.error(error))
