@@ -1,22 +1,22 @@
 @font-face {
     font-family: Righteous;
-    src: local("Righteous"), url("../fonts/Righteous/Righteous-Regular.ttf");
+    src: local("Righteous"), url("./fonts/Righteous/Righteous-Regular.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: Ubuntu Bold;
-    src: local("Ubuntu Bold"), url("../fonts/Ubuntu/Ubuntu-Bold.ttf");
+    src: local("Ubuntu Bold"), url("./fonts/Ubuntu/Ubuntu-Bold.ttf");
 }
 
 @font-face {
     font-family: Ubuntu Medium;
-    src: local("Ubuntu Medium"), url("../fonts/Ubuntu/Ubuntu-Medium.ttf");
+    src: local("Ubuntu Medium"), url("./fonts/Ubuntu/Ubuntu-Medium.ttf");
 }
 
 @font-face {
     font-family: Ubuntu;
-    src: local("Ubuntu"), url("../fonts/Ubuntu/Ubuntu-Regular.ttf");
+    src: local("Ubuntu"), url("./fonts/Ubuntu/Ubuntu-Regular.ttf");
 }
 
 body {
@@ -25,8 +25,63 @@ body {
     padding: 0;
     min-height: 100vh;
     font-family: 'Ubuntu';
-    background: radial-gradient(#0b366d 24%, #061c3a) no-repeat;
+    background: radial-gradient(#0c3c7a, #061c3a) no-repeat;
     color: #0B366D;
+}
+
+.searchArea {
+    position: relative;
+    padding: 1.4em 0;
+    height: 60px;
+}
+
+.search-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d343d;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 40px;
+    padding: 10px;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.search-box:hover>.search-txt {
+    width: 246px;
+    padding: 0 6px;
+}
+
+.search-box:hover>.search-btn {
+    background: white;
+}
+
+.search-btn {
+    color: #0b3d7e;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2d343d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    font-family: 'Ubuntu';
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0;
 }
 
 .floatable {
@@ -107,10 +162,6 @@ h1 {
     font-family: 'Ubuntu Medium';
 }
 
-#director {
-    /* border: 2px dashed white; */
-}
-
 #director_name,
 #composer_name {
     font-family: 'Ubuntu Medium';
@@ -153,10 +204,6 @@ td {
 h2 {
     font-family: 'Ubuntu Medium';
     text-align: center;
-}
-
-#head_overview {
-    /* border: 2px dashed white; */
 }
 
 #overview {
@@ -214,10 +261,6 @@ h2 {
     text-align: center;
 }
 
-#trailer {
-    /* border: 2px dashed white; */
-}
-
 #head_trailer {
     /* border: 2px dashed white; */
     margin-top: 0;
@@ -243,26 +286,28 @@ h2 {
     /* border: 2px dashed white; */
     display: block;
     margin: 0 auto;
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-    background: rgba(11, 54, 109, 0.9);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.40);
-    transition-duration: 2s;
-}
-
-#homeButton:hover {
-    background: rgba(17, 74, 150, 0.9);
-}
-
-#homeButton {
     top: 50%;
     /* poussé de la moitié de hauteur de viewport */
     right: 0;
     transform: translate(-50%, -50%);
     /* tiré de la moitié de sa propre hauteur */
-    text-align: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    background: rgba(11, 54, 109, 0.86);
     color: #E5E5E5;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.40);
+    transition-duration: 2s;
+}
+
+#homeButton:hover {
+    background: rgba(17, 74, 150, 0.86);
+}
+
+#homeButton:active {
+    transition-duration: inherit;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.40);
 }
 
 .fa-home::before {
