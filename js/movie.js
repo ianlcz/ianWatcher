@@ -38,9 +38,9 @@ axios
 
         document.title = `ianWatcher | ${data.title}`
 
-        Helpers.class("backdrop").style.backgroundImage = `url(${Helpers.imageUrl(data.backdrop_path)})`
+        Helpers.class("backdrop").style.backgroundImage = `url(${Helpers.backdropUrl(data.backdrop_path)})`
         Helpers.class("backdrop").style.backgroundColor = `#6088BC`
-        Helpers.id("poster").src = Helpers.imageUrl(data.poster_path)
+        Helpers.id("poster").src = Helpers.posterUrl(data.poster_path)
         Helpers.id("poster").alt = `Affiche du film: ${data.title}`
         Helpers.remplirElement('title', data.title)
         Helpers.remplirElement('release_date', `(${new Date(data.release_date).getFullYear()})`)
@@ -135,7 +135,7 @@ axios
             }
         })
 
-        for (let actorIndex = 0; actorIndex < 8; actorIndex++) {
+        for (let actorIndex = 0; actorIndex < 4; actorIndex++) {
             let actorDiv = document.createElement("div")
             actorDiv.id = "actor_field"
             let actorPicture = document.createElement("img")

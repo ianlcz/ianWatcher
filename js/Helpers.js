@@ -8,6 +8,10 @@ const Helpers = {
     remplirElement: (id, text) => {
         document.getElementById(id).innerText = text
     },
+    backdropUrl: path =>
+        path ? `https://image.tmdb.org/t/p/original${path}` : "https://betravingknows.com/wp-content/uploads/2017/06/video-movie-placeholder-image-grey.png",
+    posterUrl: path =>
+        path ? `https://image.tmdb.org/t/p/original${path}` : "https://www.flixdetective.com/web/images/poster-placeholder.png",
     imageUrl: path => `https://image.tmdb.org/t/p/original${path}`,
     formatRuntime: minutes => {
         const nbHours = Math.floor(minutes / 60)

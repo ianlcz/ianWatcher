@@ -10,6 +10,8 @@ const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZWVjYTNlYjkzNGM1OTVhMzJjYmQ
 axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 
+let fileTab = []
+
 const rewrite_movies_title = string => {
     return encodeURIComponent(string.replace(/[:,]/g, '').replace(/  /g, ' ').replace('œ', 'oe').replace(/[^a-zA-Z0-9-' ]/g, '')).replace(/\'/g, "%27").toUpperCase()
 }
@@ -28,36 +30,57 @@ const compareValues = (key, order = 'asc') => {
     }
 }
 
+/* On indique dans la fonction readdir le chemin du dossier que l'on souhaite ouvrir */
 fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
     if (!files.length) {
-        alert("Le dossier est vide !")
+        document.querySelector(".searchArea").style.display = "none"
+        let alertTitle = document.createElement("h1")
+        let alertBody = document.createElement("p")
+        movieGrid.style.display = "block"
+        movieGrid.style.padding = "1em"
+        movieGrid.style.position = "absolute"
+        movieGrid.style.top = "50%"
+        movieGrid.style.left = "50%"
+        movieGrid.style.transform = "translate(-50%, -50%)"
+        movieGrid.style.width = "40%"
+        movieGrid.style.background = "white"
+        movieGrid.style.borderRadius = "20px"
+        movieGrid.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.5)"
+        alertTitle.innerHTML = "Le répertoire de stockage est vide !"
+        alertTitle.style.fontFamily = "Ubuntu Medium"
+        alertTitle.style.fontSize = "larger"
+        alertBody.innerHTML = `Veuillez ajouter des films dans le répertoire</br><b>${$HOME + '/Movies/movies_storage/'}</b>`
+        alertBody.style.textAlign = "center"
+        movieGrid.appendChild(alertTitle)
+        movieGrid.appendChild(alertBody)
     } else {
         files.forEach(file => {
-            let filename = file.split('.')[0]
-
-
+            let filename = file.toString("utf8").split('.')[0]
             if (filename) {
-                axios
-                    .get(`/search/movie?language=${lang}&query=${rewrite_movies_title(filename)}`)
-                    .then(response => {
-                        const movieLink = document.createElement('a')
-                        const moviePoster = document.createElement('img')
-
-                        response.data.results.sort(compareValues('popularity'))
-                        response.data.results.forEach(movie => {
-                            if (rewrite_movies_title(filename) === rewrite_movies_title(movie.original_title) || rewrite_movies_title(filename) === rewrite_movies_title(movie.title)) {
-                                movieLink.href = `./html/detail.html?id=${movie.id}`
-                                moviePoster.src = `https://image.tmdb.org/t/p/original${movie.poster_path}`
-                                moviePoster.alt = `Affiche de ${movie.title}`
-                                moviePoster.title = movie.overview
-                                moviePoster.className = 'poster'
-                                movieGrid.appendChild(movieLink)
-                                movieLink.appendChild(moviePoster)
-                            }
-                        })
-                    })
-                    .catch(error => console.error(error));
+                fileTab.push(filename)
             }
         })
     }
+    fileTab.forEach(item => {
+        axios
+            .get(`/search/movie?language=${lang}&query=${rewrite_movies_title(item)}`)
+            .then(response => {
+                const movieLink = document.createElement('a')
+                const moviePoster = document.createElement('img')
+                response.data.results.sort(compareValues('popularity'))
+                response.data.results.forEach(movie => {
+                    console.log(rewrite_movies_title(item), rewrite_movies_title(movie.title))
+                    if (rewrite_movies_title(item) === rewrite_movies_title(movie.original_title) || rewrite_movies_title(item) === rewrite_movies_title(movie.title)) {
+                        movieLink.href = `./html/detail.html?id=${movie.id}`
+                        moviePoster.src = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : "https://www.flixdetective.com/web/images/poster-placeholder.png"
+                        moviePoster.alt = `Affiche de ${movie.title}`
+                        moviePoster.title = movie.overview
+                        moviePoster.className = 'poster'
+                        movieGrid.appendChild(movieLink)
+                        movieLink.appendChild(moviePoster)
+                    }
+                })
+            })
+            .catch(error => console.error(error))
+    })
 })
