@@ -62,15 +62,17 @@ fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
         })
     }
     fileTab.forEach(item => {
+        const movie_name = item.split(" | ")[0]
+        const movie_year = item.split(" | ")[1]
+        const url = `/search/movie?language=${lang}&query=${rewrite_movies_title(movie_name)}`
         axios
-            .get(`/search/movie?language=${lang}&query=${rewrite_movies_title(item)}`)
+            .get(!movie_year ? url : url + `&year=${movie_year}`)
             .then(response => {
                 const movieLink = document.createElement('a')
                 const moviePoster = document.createElement('img')
                 response.data.results.sort(compareValues('popularity'))
                 response.data.results.forEach(movie => {
-                    console.log(rewrite_movies_title(item), rewrite_movies_title(movie.title))
-                    if (rewrite_movies_title(item) === rewrite_movies_title(movie.original_title) || rewrite_movies_title(item) === rewrite_movies_title(movie.title)) {
+                    if (rewrite_movies_title(movie_name) === rewrite_movies_title(movie.original_title) || rewrite_movies_title(movie_name) === rewrite_movies_title(movie.title)) {
                         movieLink.href = `./html/detail.html?id=${movie.id}`
                         moviePoster.src = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : "https://www.flixdetective.com/web/images/poster-placeholder.png"
                         moviePoster.alt = `Affiche de ${movie.title}`

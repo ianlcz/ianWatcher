@@ -39,7 +39,7 @@ axios
         document.title = `ianWatcher | ${data.title}`
 
         Helpers.class("backdrop").style.backgroundImage = `url(${Helpers.backdropUrl(data.backdrop_path)})`
-        Helpers.class("backdrop").style.backgroundColor = `#6088BC`
+        Helpers.class("backdrop").style.boxShadow = `inset 0 0 0 100vh #6088BCD6`
         Helpers.id("poster").src = Helpers.posterUrl(data.poster_path)
         Helpers.id("poster").alt = `Affiche du film: ${data.title}`
         Helpers.remplirElement('title', data.title)
@@ -125,7 +125,17 @@ axios
                 l_composer.push(item)
             }
         })
-        Helpers.remplirElement('director_name', l_director.length !== 0 ? l_director.map(item => item.name).join(' et ') : Helpers.id("director").style.display = "none")
+
+        if (l_director.length === 0) {
+            Helpers.remplirElement('director_name', Helpers.id("director").style.display = "none")
+        } else if (l_director.length === 1) {
+            Helpers.remplirElement("director_name", l_director[0].name)
+        } else if (l_director[1].name.includes(l_director[0].name.split(' ')[1])) {
+            Helpers.remplirElement('director_name', `${l_director.map(item => item.name.split(' ')[0]).join(' et ')} ${l_director[0].name.split(' ')[1]}`)
+        } else {
+            Helpers.remplirElement('director_name', l_director.map(item => item.name).join(' et '))
+        }
+
         Helpers.remplirElement('composer_name', l_composer.length !== 0 ? l_composer.map(item => item.name).join(' et ') : Helpers.id("composer").style.display = "none")
 
         /* On ajoute le casting */
