@@ -1,6 +1,7 @@
 import Helpers from "./Helpers.js"
 const axios = require('axios')
 const numeral = require('numeral')
+const Caroussel = require('../classes/Caroussel')
 const lang = "fr-FR"
 const movieID = Helpers.getParam('id')
 
@@ -39,11 +40,12 @@ axios
         document.title = `ianWatcher | ${data.title}`
 
         Helpers.class("backdrop").style.backgroundImage = `url(${Helpers.backdropUrl(data.backdrop_path)})`
+        Helpers.class("backdrop").style.color = `#0B366D`
         Helpers.class("backdrop").style.boxShadow = `inset 0 0 0 100vh #6088BCD6`
         Helpers.id("poster").src = Helpers.posterUrl(data.poster_path)
         Helpers.id("poster").alt = `Affiche du film: ${data.title}`
         Helpers.remplirElement('title', data.title)
-        Helpers.remplirElement('release_date', `(${new Date(data.release_date).getFullYear()})`)
+        Helpers.remplirElement('release_date', `(${Helpers.getParam('yearFR')})`)
         Helpers.remplirElement('genres', data.genres.map(item => item.name).join(', '))
 
         data.production_companies.map(item => {
@@ -74,11 +76,11 @@ axios
 
         if (data.runtime && data.vote_average && data.budget && data.revenue) {
             Helpers.remplirElement("runtime", data.runtime ? Helpers.formatRuntime(data.runtime) : "Aucune")
-            Helpers.remplirElement("vote_average", data.vote_average ? `${data.vote_average * 10} %` : "Aucun")
+            Helpers.remplirElement("vote_average", data.vote_average ? `${data.vote_average * 10}%` : "Aucun")
             Helpers.remplirElement("vote_count", `(${numeral(data.vote_count).format('0a')} votes)`)
             if (data.budget) {
                 Helpers.remplirElement("budget_value", `${numeral(data.budget * 0.91).format('0a')} €`)
-                Helpers.remplirElement("benefits", Helpers.calculRate(data.budget, data.revenue) > 0 ? `(+${Helpers.calculRate(data.budget, data.revenue)} %)` : `(${Helpers.calculRate(data.budget, data.revenue)} %)`)
+                Helpers.remplirElement("benefits", Helpers.calculRate(data.budget, data.revenue) > 0 ? `(+${Helpers.calculRate(data.budget, data.revenue)}%)` : `(${Helpers.calculRate(data.budget, data.revenue)} %)`)
             } else {
                 Helpers.id("budget").style.display = "none"
                 Helpers.id("budget_value").style.display = "none"
@@ -145,9 +147,9 @@ axios
             }
         })
 
-        for (let actorIndex = 0; actorIndex < 4; actorIndex++) {
+        for (let actorIndex = 0; actorIndex < 8; actorIndex++) {
             let actorDiv = document.createElement("div")
-            actorDiv.id = "actor_field"
+            actorDiv.className = "actor_field"
             let actorPicture = document.createElement("img")
             actorPicture.src = Helpers.imageUrl(l_actor[actorIndex].profile_path)
             actorPicture.alt = `Image de ${l_actor[actorIndex].name}`
@@ -172,8 +174,19 @@ axios
                 actorDetail.style.height = "2em"
             }
         }
+        new Caroussel(Helpers.id('body_distribution'), {
+            slidesToScroll: 2,
+            slidesVisible: 4,
+            loop: true
+        })
+
+        let nextButton = document.getElementsByClassName("caroussel_next")
+        let nextIcon = document.createElement("i")
+        nextButton.appendChild(nextIcon)
     })
     .catch(error => console.error(error))
+
+
 
 axios
     .get(`/movie/${movieID}/videos?language=${lang}`)

@@ -13,7 +13,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 let fileTab = []
 
 const rewrite_movies_title = string => {
-    return encodeURIComponent(string.replace(/[:,]/g, '').replace(/  /g, ' ').replace('œ', 'oe').replace(/[^a-zA-Z0-9-' ]/g, '')).replace(/\'/g, "%27").toUpperCase()
+    return escape(string.replace(/[:,]/g, '').replace(/  /g, ' ').replace('œ', 'oe')).toLowerCase()
 }
 
 const compareValues = (key, order = 'asc') => {
@@ -55,7 +55,7 @@ fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
         movieGrid.appendChild(alertBody)
     } else {
         files.forEach(file => {
-            let filename = file.toString("utf8").split('.')[0]
+            let filename = file.split('.')[0]
             if (filename) {
                 fileTab.push(filename)
             }
@@ -64,7 +64,8 @@ fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
     fileTab.forEach(item => {
         const movie_name = item.split(" | ")[0]
         const movie_year = item.split(" | ")[1]
-        const url = `/search/movie?language=${lang}&query=${rewrite_movies_title(movie_name)}`
+        const url = `/search/movie?language=${lang}&query=${rewrite_movies_title(movie_name)}&region=FR`
+        console.log(rewrite_movies_title(movie_name), rewrite_movies_title('Ant-Man et la guêpe'))
         axios
             .get(!movie_year ? url : url + `&year=${movie_year}`)
             .then(response => {
@@ -73,7 +74,7 @@ fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
                 response.data.results.sort(compareValues('popularity'))
                 response.data.results.forEach(movie => {
                     if (rewrite_movies_title(movie_name) === rewrite_movies_title(movie.original_title) || rewrite_movies_title(movie_name) === rewrite_movies_title(movie.title)) {
-                        movieLink.href = `./html/detail.html?id=${movie.id}`
+                        movieLink.href = `./html/detail.html?id=${movie.id}&yearFR=${new Date(movie.release_date).getFullYear()}`
                         moviePoster.src = movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path}` : "https://www.flixdetective.com/web/images/poster-placeholder.png"
                         moviePoster.alt = `Affiche de ${movie.title}`
                         moviePoster.title = movie.overview

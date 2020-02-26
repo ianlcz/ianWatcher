@@ -213,21 +213,25 @@ h2 {
     text-align: justify;
 }
 
+#distribution {
+    width: 100%;
+}
+
 #head_distribution {
     margin: 0;
 }
 
 #body_distribution {
     /* border: 2px dashed white; */
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    /* display: grid;
+    grid-template-columns: repeat(4, 1fr); */
     margin: 0.6em 0;
     padding: 1em;
-    row-gap: 1.6em;
-    column-gap: 1.6em;
+    /*     row-gap: 1.6em;
+    column-gap: 1.6em; */
 }
 
-#actor_field {
+.actor_field {
     /* border: 2px dashed white; */
     height: auto;
     border-radius: 10px;
@@ -237,14 +241,14 @@ h2 {
 #actor_picture {
     /* border: 2px dashed white; */
     width: 100%;
-    height: 14em;
+    height: 16em;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
 #actor_detail {
     /* border: 2px dashed white; */
-    padding: 0.6em 0.6em 0.2em 0.6em;
+    padding: 0.6em;
     height: 4em;
     background-color: rgb(255, 255, 255, 0.9);
     border-bottom-left-radius: 10px;
@@ -261,6 +265,59 @@ h2 {
 #actor_character {
     font-size: 12px;
     text-align: center;
+}
+
+/**
+CAROUSSEL
+*/
+.caroussel {
+    position: relative;
+    overflow: hidden;
+}
+
+.caroussel_container {
+    transition: transform 1.2s;
+    transform: translate3d(0, 0, 0);
+}
+
+.caroussel_container::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.caroussel_item {
+    float: left;
+}
+
+.caroussel_next,
+.caroussel_prev {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    top: 50%;
+    margin-top: -20px;
+    right: 0.6em;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.40);
+    cursor: pointer;
+    transition: transform 0.4s, opacity 0.4s;
+}
+
+.caroussel_next:hover,
+.caroussel_prev:hover {
+    transform: scale(1.1);
+}
+
+.caroussel_prev {
+    right: auto;
+    left: 0.6em;
+}
+
+.caroussel_next--hidden,
+.caroussel_prev--hidden {
+    opacity: 0;
 }
 
 #head_trailer {
@@ -333,13 +390,108 @@ footer {
     text-align: center;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (min-width: 770px) and (max-width: 1100px) {
     #movieGrid {
         grid-template-columns: repeat(4, 1fr);
     }
 
     img.poster {
         height: 330px;
+    }
+
+    #poster {
+        width: 34%;
+        height: 90vh;
+    }
+
+    #movie-infos {
+        position: static;
+        margin-left: 40%;
+    }
+
+    #body_trailer {
+        height: 339px;
+    }
+
+    #body_distribution {
+        grid-template-columns: repeat(4, 1fr);
+        row-gap: 1em;
+        column-gap: 1em;
+    }
+
+    .actor_field {
+        height: auto;
+    }
+
+    #actor_picture {
+        height: 160px;
+    }
+
+    #actor_detail {
+        padding-bottom: 0.6em;
+        height: 5em;
+    }
+
+    #actor_name {
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (min-width: 510px) and (max-width: 770px) {
+    #movieGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    img.poster {
+        height: 500px;
+    }
+
+    #poster {
+        position: absolute;
+        width: 34%;
+        height: 50vh;
+    }
+
+    #movie-infos {
+        position: relative;
+        margin-left: 40%;
+    }
+
+    #body_trailer {
+        height: 200px;
+    }
+
+    #body_distribution {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 1em;
+        column-gap: 1em;
+    }
+
+    .actor_field {
+        height: auto;
+    }
+
+    #actor_picture {
+        height: 230px;
+    }
+
+    #actor_detail {
+        padding-bottom: 0.6em;
+        height: 4em;
+    }
+
+    #actor_name {
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    #movieGrid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    img.poster {
+        height: 400px;
     }
 
     #poster {
