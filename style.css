@@ -293,14 +293,13 @@ CAROUSSEL
 .caroussel_next,
 .caroussel_prev {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
     top: 50%;
     margin-top: -20px;
     right: 0.6em;
-    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.40);
     cursor: pointer;
     transition: transform 0.4s, opacity 0.4s;
 }
@@ -369,11 +368,14 @@ CAROUSSEL
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.40);
 }
 
-.fa-home::before {
+.fas::before {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.fa-angle-left, .fa-angle-right{
+    color: rgb(23, 90, 177);
 }
 
 footer {
@@ -424,7 +426,7 @@ footer {
     }
 
     #actor_picture {
-        height: 160px;
+        height: 180px;
     }
 
     #actor_detail {

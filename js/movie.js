@@ -147,42 +147,51 @@ axios
             }
         })
 
-        for (let actorIndex = 0; actorIndex < 8; actorIndex++) {
-            let actorDiv = document.createElement("div")
-            actorDiv.className = "actor_field"
-            let actorPicture = document.createElement("img")
-            actorPicture.src = Helpers.imageUrl(l_actor[actorIndex].profile_path)
-            actorPicture.alt = `Image de ${l_actor[actorIndex].name}`
-            actorPicture.id = "actor_picture"
-            let actorDetail = document.createElement("div")
-            actorDetail.id = "actor_detail"
-            let actorName = document.createElement("h3")
-            actorName.innerText = l_actor[actorIndex].name
-            actorName.id = "actor_name"
-            Helpers.id("body_distribution").appendChild(actorDiv)
-            actorDiv.appendChild(actorPicture)
-            actorDiv.appendChild(actorDetail)
-            actorDetail.appendChild(actorName)
-
-            if (l_actor[actorIndex].character) {
-                let actorCharacter = document.createElement("p")
-                actorCharacter.innerText = l_actor[actorIndex].character
-                actorCharacter.id = "actor_character"
+        if (l_actor.length >= 4) {
+            for (let actorIndex = 0; actorIndex < 8; actorIndex++) {
+                let actorDiv = document.createElement("div")
+                actorDiv.className = "actor_field"
+                let actorPicture = document.createElement("img")
+                actorPicture.src = Helpers.imageUrl(l_actor[actorIndex].profile_path)
+                actorPicture.alt = `Image de ${l_actor[actorIndex].name}`
+                actorPicture.id = "actor_picture"
+                let actorDetail = document.createElement("div")
+                actorDetail.id = "actor_detail"
+                let actorName = document.createElement("h3")
+                actorName.innerText = l_actor[actorIndex].name
+                actorName.id = "actor_name"
                 Helpers.id("body_distribution").appendChild(actorDiv)
-                actorDetail.appendChild(actorCharacter)
-            } else {
-                actorDetail.style.height = "2em"
-            }
-        }
-        new Caroussel(Helpers.id('body_distribution'), {
-            slidesToScroll: 2,
-            slidesVisible: 4,
-            loop: true
-        })
+                actorDiv.appendChild(actorPicture)
+                actorDiv.appendChild(actorDetail)
+                actorDetail.appendChild(actorName)
 
-        let nextButton = document.getElementsByClassName("caroussel_next")
-        let nextIcon = document.createElement("i")
-        nextButton.appendChild(nextIcon)
+                if (l_actor[actorIndex].character) {
+                    let actorCharacter = document.createElement("p")
+                    actorCharacter.innerText = l_actor[actorIndex].character
+                    actorCharacter.id = "actor_character"
+                    Helpers.id("body_distribution").appendChild(actorDiv)
+                    actorDetail.appendChild(actorCharacter)
+                } else {
+                    actorDetail.style.height = "2em"
+                }
+            }
+            new Caroussel(Helpers.id('body_distribution'), {
+                slidesToScroll: 2,
+                slidesVisible: 4,
+                loop: true
+            })
+
+            let prevButton = Helpers.class("caroussel_prev")
+            let nextButton = Helpers.class("caroussel_next")
+            let prevIcon = document.createElement("i")
+            let nextIcon = document.createElement("i")
+            prevIcon.className = "fas fa-angle-left fa-lg"
+            nextIcon.className = "fas fa-angle-right fa-lg"
+            prevButton.appendChild(prevIcon)
+            nextButton.appendChild(nextIcon)
+        } else {
+            Helpers.id("head_distribution").style.display = "none"
+        }
     })
     .catch(error => console.error(error))
 

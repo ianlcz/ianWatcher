@@ -46,12 +46,23 @@ class Caroussel {
      * Applique les bonnes dimensions aux éléments du caroussel
      */
     setStyle() {
-        let ratio = (this.items.length / this.slidesVisible) + 0.36
-        this.container.style.width = (ratio * 100) + "%"
-        this.items.forEach(item => {
-            item.style.width = ((100 / this.slidesVisible) / ratio) + "%"
-            item.style.marginRight = 1 + "em"
-        });
+        if (window.outerWidth >= 770 && window.outerWidth <= 1100) {
+            let ratio = (this.items.length / this.slidesVisible) + 0.52
+            this.container.style.width = (ratio * 100) + "%"
+            this.items.forEach(item => {
+                item.style.width = ((100 / this.slidesVisible) / ratio) + "%"
+                item.style.marginLeft = 0.5 + "em"
+                item.style.marginRight = 0.5 + "em"
+            })
+        } else {
+            let ratio = (this.items.length / this.slidesVisible) + 0.36
+            this.container.style.width = (ratio * 100) + "%"
+            this.items.forEach(item => {
+                item.style.width = ((100 / this.slidesVisible) / ratio) + "%"
+                item.style.marginLeft = 0.5 + "em"
+                item.style.marginRight = 0.5 + "em"
+            })
+        }
     }
 
     createNavigation() {
