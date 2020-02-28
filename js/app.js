@@ -13,7 +13,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 let fileTab = []
 
 const rewrite_movies_title = string => {
-    return escape(string.replace(/[:,]/g, '').replace(/  /g, ' ').replace('œ', 'oe')).toLowerCase()
+    return string.replace(/[:,]/g, '').replace(/  /g, ' ').replace('œ', 'oe').toLowerCase()
 }
 
 const compareValues = (key, order = 'asc') => {
@@ -64,8 +64,9 @@ fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
     fileTab.forEach(item => {
         const movie_name = item.split(" | ")[0]
         const movie_year = item.split(" | ")[1]
-        const url = `/search/movie?language=${lang}&query=${rewrite_movies_title(movie_name)}&region=FR`
-        console.log(rewrite_movies_title(movie_name), rewrite_movies_title('Ant-Man et la guêpe'))
+        const url = `/search/movie?language=${lang}&query=${decodeURIComponent(movie_name).replace(/ /g, "%20")}&region=FR`
+        /* console.log(rewrite_movies_title(movie_name), rewrite_movies_title('Ant-Man et la guêpe')) */
+
         axios
             .get(!movie_year ? url : url + `&year=${movie_year}`)
             .then(response => {

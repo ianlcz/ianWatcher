@@ -63,8 +63,10 @@
 
     <footer>
         Copyright <span style="font-family: Arial;font-weight: bold;">&copy;</span>
-        <script>
-            document.write(' ' + new Date().getFullYear() + " ianDev")
+        <script type="text/javascript">
+            document.write(
+                ` ${new Date().getFullYear() === 2020 ? new Date().getFullYear() : "2020 - " + new Date().getFullYear()} ianDev`
+            )
         </script>
     </footer>
 </body>

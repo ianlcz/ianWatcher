@@ -301,6 +301,7 @@ CAROUSSEL
     margin-top: -20px;
     right: 0.6em;
     cursor: pointer;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.40);
     transition: transform 0.4s, opacity 0.4s;
 }
 
@@ -368,7 +369,7 @@ CAROUSSEL
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.40);
 }
 
-.fas::before {
+.fa-home::before, .fa-angle-left::before, .fa-angle-right::before {
     position: absolute;
     top: 50%;
     left: 50%;
