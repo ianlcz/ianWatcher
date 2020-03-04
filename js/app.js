@@ -1,6 +1,5 @@
 const fs = require('fs')
 const $HOME = require('home-path')
-const movieGrid = document.getElementById('movieGrid')
 
 const axios = require('axios')
 const lang = "fr-FR"
@@ -10,10 +9,10 @@ const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZWVjYTNlYjkzNGM1OTVhMzJjYmQ
 axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 
-let fileTab = []
+const l_file_movie = []
 
 const rewrite_movies_title = string => {
-    return string.replace(/[:,]/g, '').replace(/  /g, ' ').replace('œ', 'oe').toLowerCase()
+    return string.replace(/[:,]/g, '').replace(/  /g, ' ').toLowerCase()
 }
 
 const compareValues = (key, order = 'asc') => {
@@ -51,28 +50,31 @@ fs.readdir($HOME + '/Movies/movies_storage/', (error, files) => {
         alertTitle.style.fontSize = "larger"
         alertBody.innerHTML = `Veuillez ajouter des films dans le répertoire</br><b>${$HOME + '/Movies/movies_storage/'}</b>`
         alertBody.style.textAlign = "center"
-        movieGrid.appendChild(alertTitle)
+        Helpers.id('movieGrid').appendChild(alertTitle)
         movieGrid.appendChild(alertBody)
     } else {
         files.forEach(file => {
             let filename = file.split('.')[0]
             if (filename) {
-                fileTab.push(filename)
+                l_file_movie.push(filename)
             }
         })
     }
-    fileTab.forEach(item => {
+    l_file_movie.forEach(item => {
         const movie_name = item.split(" | ")[0]
         const movie_year = item.split(" | ")[1]
-        const url = `/search/movie?language=${lang}&query=${decodeURIComponent(movie_name).replace(/ /g, "%20")}&region=FR`
-        /* console.log(rewrite_movies_title(movie_name), rewrite_movies_title('Ant-Man et la guêpe')) */
+        const url = `/search/movie?language=${lang}&query=${movie_name}&region=FR`
 
         axios
             .get(!movie_year ? url : url + `&year=${movie_year}`)
             .then(response => {
                 const movieLink = document.createElement('a')
                 const moviePoster = document.createElement('img')
-                response.data.results.sort(compareValues('popularity'))
+                if (!movie_year) {
+                    response.data.results.sort(compareValues('popularity'))
+                } else {
+                    response.data.results.sort(compareValues('release_date'))
+                }
                 response.data.results.forEach(movie => {
                     if (rewrite_movies_title(movie_name) === rewrite_movies_title(movie.original_title) || rewrite_movies_title(movie_name) === rewrite_movies_title(movie.title)) {
                         movieLink.href = `./html/detail.html?id=${movie.id}&yearFR=${new Date(movie.release_date).getFullYear()}`

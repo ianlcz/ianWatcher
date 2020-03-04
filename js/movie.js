@@ -18,7 +18,7 @@ numeral.register('locale', 'fr', {
     abbreviations: {
         thousand: 'k',
         million: 'M',
-        billion: 'Mrd',
+        billion: 'Mdr',
         trillion: 'T'
     },
     ordinal: number => {
@@ -147,7 +147,7 @@ axios
             }
         })
 
-        if (l_actor.length >= 4) {
+        if (l_actor.length >= 8) {
             for (let actorIndex = 0; actorIndex < 8; actorIndex++) {
                 let actorDiv = document.createElement("div")
                 actorDiv.className = "actor_field"
