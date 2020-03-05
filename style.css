@@ -223,12 +223,8 @@ h2 {
 
 #body_distribution {
     /* border: 2px dashed white; */
-    /* display: grid;
-    grid-template-columns: repeat(4, 1fr); */
     margin: 0.6em 0;
     padding: 1em;
-    /*     row-gap: 1.6em;
-    column-gap: 1.6em; */
 }
 
 .actor_field {
@@ -288,6 +284,7 @@ CAROUSSEL
 
 .caroussel_item {
     float: left;
+    margin: 6px;
 }
 
 .caroussel_next,

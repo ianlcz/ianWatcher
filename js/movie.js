@@ -112,6 +112,7 @@ axios
     .get(`/movie/${movieID}/credits?language=${lang}`)
     .then(response => {
         const data = response.data
+        const span = document.createElement("span")
         let l_director = []
         let l_composer = []
         let l_actor = []
@@ -133,12 +134,12 @@ axios
         } else if (l_director.length === 1) {
             Helpers.remplirElement("director_name", l_director[0].name)
         } else if (l_director[1].name.includes(l_director[0].name.split(' ')[1])) {
-            Helpers.remplirElement('director_name', `${l_director.map(item => item.name.split(' ')[0]).join(' et ')} ${l_director[0].name.split(' ')[1]}`)
+            Helpers.remplirElement('director_name', `${l_director.map(director => director.name.split(' ')[0]).join(" et ")} ${l_director[0].name.split(' ')[1]}`)
         } else {
-            Helpers.remplirElement('director_name', l_director.map(item => item.name).join(' et '))
+            Helpers.remplirElement('director_name', l_director.map(director => director.name).join(" et "))
         }
 
-        Helpers.remplirElement('composer_name', l_composer.length !== 0 ? l_composer.map(item => item.name).join(' et ') : Helpers.id("composer").style.display = "none")
+        Helpers.remplirElement('composer_name', l_composer.length !== 0 ? l_composer.map(composer => composer.name).join(' et ') : Helpers.id("composer").style.display = "none")
 
         /* On ajoute le casting */
         data.cast.map(item => {
