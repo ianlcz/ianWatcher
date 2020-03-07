@@ -124,7 +124,7 @@ img.poster:hover {
     width: 38%;
     height: 93.5vh;
     border-radius: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.36);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.36);
 }
 
 #movie-infos {
@@ -164,6 +164,7 @@ h1 {
 }
 
 #director_name,
+#creator_name,
 #composer_name {
     font-family: 'Ubuntu Medium';
 }
@@ -175,7 +176,7 @@ table {
     background-color: rgba(255, 255, 255, 0.8);
     color: #0B366D;
     border-radius: 50px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.26);
 }
 
 th {
@@ -359,6 +360,7 @@ CAROUSSEL
 
 #homeButton:hover {
     background: rgba(17, 74, 150, 0.86);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.40);
 }
 
 #homeButton:active {
@@ -366,13 +368,17 @@ CAROUSSEL
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.40);
 }
 
-.fa-home::before, .fa-angle-left::before, .fa-angle-right::before {
+.fa-home::before,
+.fa-angle-left::before,
+.fa-angle-right::before {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.fa-angle-left, .fa-angle-right{
+
+.fa-angle-left,
+.fa-angle-right {
     color: rgb(23, 90, 177);
 }
 

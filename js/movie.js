@@ -60,17 +60,19 @@ axios
             if (l_production[0].name.includes("Marvel Studios") || l_production[0].name.includes("Syncopy")) {
                 Helpers.id("production").src = Helpers.imageUrl(l_production[0].logo_path)
                 Helpers.id("production").alt = `Logo de ${l_production[0].name}`
+                Helpers.id("production").title = l_production[0].name
             } else {
                 let minimumIndex = l_production[0].id
-                l_production.map(item => {
-                    if (item.id <= minimumIndex) {
-                        minimumIndex = item.id
+                l_production.map(production => {
+                    if (production.id <= minimumIndex) {
+                        minimumIndex = production.id
                         l_mainProduction.pop()
-                        l_mainProduction.push(item)
+                        l_mainProduction.push(production)
                     }
                 })
                 Helpers.id("production").src = Helpers.imageUrl(l_mainProduction[0].logo_path)
                 Helpers.id("production").alt = `Logo de ${l_mainProduction[0].name}`
+                Helpers.id("production").title = l_mainProduction[0].name
             }
         }
 
@@ -112,16 +114,23 @@ axios
     .get(`/movie/${movieID}/credits?language=${lang}`)
     .then(response => {
         const data = response.data
-        const span = document.createElement("span")
-        let l_director = []
-        let l_composer = []
-        let l_actor = []
-
+        const l_creator = []
+        const l_director = []
+        const l_writer = []
+        const l_composer = []
+        const l_actor = []
 
         data.crew.map(item => {
             /* On recherche le ou les réalisateurs du film */
             if (item.department === 'Directing' && item.job === 'Director') {
                 l_director.push(item)
+            }
+            if (item.department === 'Writing' && item.job === 'Writer') {
+                l_writer.push(item)
+            }
+            /* On recherche le créateur des personnages */
+            if (item.department === 'Writing' && (item.job === "Characters" || item.job === "Comic Book" || item.job === "Novel" || item.job === "Author") && l_creator.length < 2) {
+                l_creator.push(item)
             }
             /* On recherche le compositeur de la bande originale */
             if (item.department === "Sound" && item.job === "Original Music Composer") {
@@ -129,15 +138,50 @@ axios
             }
         })
 
-        if (l_director.length === 0) {
-            Helpers.remplirElement('director_name', Helpers.id("director").style.display = "none")
-        } else if (l_director.length === 1) {
-            Helpers.remplirElement("director_name", l_director[0].name)
-        } else if (l_director[1].name.includes(l_director[0].name.split(' ')[1])) {
-            Helpers.remplirElement('director_name', `${l_director.map(director => director.name.split(' ')[0]).join(" et ")} ${l_director[0].name.split(' ')[1]}`)
-        } else {
-            Helpers.remplirElement('director_name', l_director.map(director => director.name).join(" et "))
+        if (l_creator.length > 0) {
+            if (l_creator[0].job === "Author") {
+                Helpers.remplirElement("creator", "D'après le roman de ")
+            } else if (l_creator[0].job === "Novel") {
+                Helpers.remplirElement("creator", "D'après ")
+            } else {
+                Helpers.remplirElement("creator", "D'après les personnages créés par ")
+            }
         }
+
+        const creator_span = document.createElement("span")
+        creator_span.id = "creator_name"
+
+        if (l_creator.length === 0 || l_creator[0].job === "Writer") {
+            Helpers.id("creator").style.display = "none"
+        } else {
+            creator_span.innerText = l_creator.map(creator => creator.name).join(" et ")
+        }
+
+        Helpers.id("creator").appendChild(creator_span)
+        Helpers.id('creator').style.margin = "1.4em 0"
+        Helpers.id('creator').style.textAlign = "center"
+
+        if (l_writer.length > 0 && l_director[0].name === l_writer[0].name) {
+            Helpers.id("creator").style.display = "none"
+            Helpers.remplirElement("director", "Écrit et réalisé par ")
+        } else {
+            Helpers.remplirElement("director", "Réalisé par ")
+        }
+
+        const director_span = document.createElement("span")
+        director_span.id = "director_name"
+
+        if (l_director.length === 0) {
+            Helpers.id("director").style.display = "none"
+        } else if (l_director.length === 1) {
+            director_span.innerText = l_director[0].name
+        } else if (l_director[1].name.includes(l_director[0].name.split(' ')[1])) {
+            director_span.innerText = `${l_director.map(director => director.name.split(' ')[0]).join(" et ")} ${l_director[0].name.split(' ')[1]}`
+        } else {
+            director_span.innerText = l_director.map(director => director.name).join(" et ")
+        }
+
+        Helpers.id("director").appendChild(director_span)
 
         Helpers.remplirElement('composer_name', l_composer.length !== 0 ? l_composer.map(composer => composer.name).join(' et ') : Helpers.id("composer").style.display = "none")
 
