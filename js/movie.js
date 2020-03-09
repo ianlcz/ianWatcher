@@ -119,6 +119,16 @@ axios
         const l_writer = []
         const l_composer = []
         const l_actor = []
+        
+        const isInArray = (string, array) => {
+            let result = false
+            array.forEach(element => {
+                if (element.name === string) {
+                    result = true
+                }
+            })
+            return result
+        }
 
         data.crew.map(item => {
             /* On recherche le ou les réalisateurs du film */
@@ -130,7 +140,10 @@ axios
             }
             /* On recherche le créateur des personnages */
             if (item.department === 'Writing' && (item.job === "Characters" || item.job === "Comic Book" || item.job === "Novel" || item.job === "Author") && l_creator.length < 2) {
-                l_creator.push(item)
+
+                if (!isInArray(item.name, l_creator)) {
+                    l_creator.push(item)
+                }
             }
             /* On recherche le compositeur de la bande originale */
             if (item.department === "Sound" && item.job === "Original Music Composer") {
@@ -155,7 +168,7 @@ axios
             creator_span.innerText = l_creator.map(creator => creator.name).join(" et ")
         }
 
-        Helpers.id("creator").style.width = `${Helpers.id("creator").textContent.length * 2.1}%`
+        Helpers.id("creator").style.width = `${Helpers.id("creator").textContent.length * 2}%`
         Helpers.id("creator").style.background = `linear-gradient(${new Date().getFullYear() - 1996}deg, rgba(11, 53, 109, 0.8), rgba(19, 87, 177, 0.8))`
 
         Helpers.id("creator").appendChild(creator_span)

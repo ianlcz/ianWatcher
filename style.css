@@ -163,19 +163,20 @@ h1 {
     font-family: 'Ubuntu Medium';
 }
 
+#creator {
+    margin: 1.4em auto;
+    padding: 0.5em 0;
+    text-align: center;
+    border-radius: 20px;
+    color: white;
+    font-size: medium;
+    box-shadow: inset 0px 0px 6px #282C34;
+}
+
 #director_name,
 #creator_name,
 #composer_name {
     font-family: 'Ubuntu Medium';
-}
-
-#creator{
-    margin: 1.4em auto;
-    padding: 0.4em;
-    text-align: center;
-    border-radius: 20px;
-    color: white;
-    box-shadow: inset 0px 0px 6px #282C34;
 }
 
 table {
