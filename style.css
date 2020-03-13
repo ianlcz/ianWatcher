@@ -1,22 +1,22 @@
 @font-face {
     font-family: Righteous;
-    src: local("Righteous"), url("./fonts/Righteous/Righteous-Regular.ttf");
-    font-weight: normal;
+    src: local("Righteous"), url(fonts/Righteous/Righteous-Regular.ttf);
+    font-weight: 400
 }
 
 @font-face {
     font-family: Ubuntu Bold;
-    src: local("Ubuntu Bold"), url("./fonts/Ubuntu/Ubuntu-Bold.ttf");
+    src: local("Ubuntu Bold"), url(fonts/Ubuntu/Ubuntu-Bold.ttf)
 }
 
 @font-face {
     font-family: Ubuntu Medium;
-    src: local("Ubuntu Medium"), url("./fonts/Ubuntu/Ubuntu-Medium.ttf");
+    src: local("Ubuntu Medium"), url(fonts/Ubuntu/Ubuntu-Medium.ttf)
 }
 
 @font-face {
     font-family: Ubuntu;
-    src: local("Ubuntu"), url("./fonts/Ubuntu/Ubuntu-Regular.ttf");
+    src: local("Ubuntu"), url(fonts/Ubuntu/Ubuntu-Regular.ttf)
 }
 
 body {
@@ -24,15 +24,15 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    font-family: 'Ubuntu';
+    font-family: Ubuntu;
     background: radial-gradient(#0c3c7a, #061c3a) no-repeat;
-    color: #0B366D;
+    color: #0b366d
 }
 
 .searchArea {
     position: relative;
     padding: 1.4em 0;
-    height: 60px;
+    height: 60px
 }
 
 .search-box {
@@ -41,19 +41,19 @@ body {
     transform: translateX(-50%);
     background: #2d343d;
     height: 40px;
-    border: 2px solid white;
+    border: 2px solid #fff;
     border-radius: 40px;
     padding: 10px;
-    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .5)
 }
 
 .search-box:hover>.search-txt {
     width: 246px;
-    padding: 0 6px;
+    padding: 0 6px
 }
 
 .search-box:hover>.search-btn {
-    background: white;
+    background: #fff
 }
 
 .search-btn {
@@ -67,25 +67,25 @@ body {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    transition: 0.4s;
+    transition: .4s
 }
 
 .search-txt {
     border: none;
-    background: none;
-    outline: none;
+    background: 0 0;
+    outline: 0;
     float: left;
     padding: 0;
-    font-family: 'Ubuntu';
-    color: white;
+    font-family: Ubuntu;
+    color: #fff;
     font-size: 16px;
-    transition: 0.4s;
+    transition: .4s;
     line-height: 40px;
-    width: 0;
+    width: 0
 }
 
 .floatable {
-    position: fixed;
+    position: fixed
 }
 
 #movieGrid {
@@ -94,7 +94,7 @@ body {
     padding-top: 1em;
     grid-template-columns: repeat(8, 1fr);
     row-gap: 1.6em;
-    column-gap: 1.6em;
+    column-gap: 1.6em
 }
 
 img.poster {
@@ -102,12 +102,12 @@ img.poster {
     height: 240px;
     border-radius: 10px;
     cursor: pointer;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
-    transition-duration: 0.6s;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+    transition-duration: .6s
 }
 
 img.poster:hover {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5)
 }
 
 .backdrop {
@@ -115,187 +115,175 @@ img.poster:hover {
     display: flex;
     min-height: 100vh;
     background-size: cover;
-    background-position: center;
+    background-position: center
 }
 
 #poster {
-    /* border: 2px dashed white; */
     margin: 28px;
     width: 38%;
     height: 93.5vh;
     border-radius: 20px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.36);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .36)
 }
 
 #movie-infos {
-    /* border: 2px dashed white; */
     position: static;
     margin: 1.6em 1em 1.6em 42%;
-    width: 100%;
+    width: 100%
 }
 
 h1 {
-    /* border: 2px dashed white; */
     display: block;
-    text-align: center;
+    text-align: center
 }
 
 #title {
-    margin-right: 0.4em;
+    margin-right: .4em;
     font-family: 'Ubuntu Bold';
-    line-height: 1em;
+    line-height: 1em
 }
 
 #release_date {
-    font-family: 'Righteous';
+    font-family: Righteous;
     font-size: 70%;
-    font-weight: lighter;
+    font-weight: lighter
 }
 
 #production {
     display: block;
     margin: 0 auto;
-    height: 1.8em;
+    height: 1.8em
 }
 
 #genres {
-    /* border: 2px dashed white; */
-    font-family: 'Ubuntu Medium';
+    font-family: 'Ubuntu Medium'
 }
 
 #creator {
     margin: 1.4em auto;
-    padding: 0.5em 0;
+    padding: .5em 0;
     text-align: center;
     border-radius: 20px;
-    color: white;
+    color: #fff;
     font-size: medium;
-    box-shadow: inset 0px 0px 6px #282C34;
+    box-shadow: inset 0 0 6px #282c34
 }
 
-#director_name,
+#composer_name,
 #creator_name,
-#composer_name {
-    font-family: 'Ubuntu Medium';
+#director_name {
+    font-family: 'Ubuntu Medium'
 }
 
 table {
     margin: 2em auto;
-    padding: 0.6em;
+    padding: .6em;
     width: 90%;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #0B366D;
+    background-color: rgba(255, 255, 255, .8);
+    color: #0b366d;
     border-radius: 50px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.26);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .26)
 }
 
 th {
     font-family: 'Ubuntu Medium';
-    font-size: large;
+    font-size: large
 }
 
 td {
     text-align: center;
-    font-size: medium;
+    font-size: medium
 }
 
 #vote_average {
-    font-family: 'Righteous';
+    font-family: Righteous
 }
 
-#vote_count,
-#benefits {
-    margin-left: 0.6em;
+#benefits,
+#vote_count {
+    margin-left: .6em
 }
 
 #benefits {
-    font-family: 'Righteous';
-    color: #0B6D36;
+    font-family: Righteous;
+    color: #0b6d36
 }
 
 h2 {
     font-family: 'Ubuntu Medium';
-    text-align: center;
+    text-align: center
 }
 
 #overview {
-    /* border: 2px dashed white; */
     margin-top: 1px;
-    text-align: justify;
+    text-align: justify
 }
 
 #distribution {
-    width: 100%;
+    width: 100%
 }
 
 #head_distribution {
-    margin: 0;
+    margin: 0
 }
 
 #body_distribution {
-    /* border: 2px dashed white; */
-    margin: 0.6em 0;
-    padding: 1em;
+    margin: .6em 0;
+    padding: 1em
 }
 
 .actor_field {
-    /* border: 2px dashed white; */
     height: auto;
     border-radius: 10px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.40);
+    box-shadow: 0 0 6px rgba(0, 0, 0, .4)
 }
 
 #actor_picture {
-    /* border: 2px dashed white; */
     width: 100%;
     height: 16em;
     border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-right-radius: 10px
 }
 
 #actor_detail {
-    /* border: 2px dashed white; */
-    padding: 0.6em;
+    padding: .6em;
     height: 4em;
-    background-color: rgb(255, 255, 255, 0.9);
+    background-color: rgb(255, 255, 255, .9);
     border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 10px
 }
 
 #actor_name {
-    margin-top: 0.2em;
+    margin-top: .2em;
     font-family: 'Ubuntu Medium';
     font-size: 12px;
-    text-align: center;
+    text-align: center
 }
 
 #actor_character {
     font-size: 12px;
-    text-align: center;
+    text-align: center
 }
 
-/**
-CAROUSSEL
-*/
 .caroussel {
     position: relative;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .caroussel_container {
     transition: transform 1.2s;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
 }
 
 .caroussel_container::after {
     content: '';
     clear: both;
-    display: table;
+    display: table
 }
 
 .caroussel_item {
     float: left;
-    margin: 6px;
+    margin: 6px
 }
 
 .caroussel_next,
@@ -303,247 +291,256 @@ CAROUSSEL
     position: absolute;
     width: 30px;
     height: 30px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, .9);
     border-radius: 50%;
     top: 50%;
     margin-top: -20px;
-    right: 0.6em;
+    right: .6em;
     cursor: pointer;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.40);
-    transition: transform 0.4s, opacity 0.4s;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .4);
+    transition: transform .4s, opacity .4s
 }
 
 .caroussel_next:hover,
 .caroussel_prev:hover {
-    transform: scale(1.1);
+    transform: scale(1.1)
 }
 
 .caroussel_prev {
     right: auto;
-    left: 0.6em;
+    left: .6em
 }
 
 .caroussel_next--hidden,
 .caroussel_prev--hidden {
-    opacity: 0;
+    opacity: 0
 }
 
 #head_trailer {
-    /* border: 2px dashed white; */
-    margin-top: 0;
+    margin-top: 0
 }
 
 #body_trailer {
-    padding: 0.4em;
+    padding: .4em;
     width: 96%;
     height: 420px;
     border-radius: 20px;
-    box-shadow: inset 0px 0px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 16px rgba(0, 0, 0, .25)
 }
 
 #navigation {
-    /* border: 2px dashed white; */
     display: block;
     position: relative;
     margin-right: 10px;
-    width: 10%;
+    width: 10%
 }
 
 #homeButton {
-    /* border: 2px dashed white; */
     display: block;
     margin: 0 auto;
     top: 50%;
-    /* poussé de la moitié de hauteur de viewport */
     right: 0;
     transform: translate(-50%, -50%);
-    /* tiré de la moitié de sa propre hauteur */
     width: 42px;
     height: 42px;
     border-radius: 100%;
-    background: rgba(11, 54, 109, 0.86);
-    color: #E5E5E5;
+    background: rgba(11, 54, 109, .86);
+    color: #e5e5e5;
     text-align: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.40);
-    transition-duration: 2s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    transition-duration: 2s
 }
 
 #homeButton:hover {
-    background: rgba(17, 74, 150, 0.86);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.40);
+    background: rgba(17, 74, 150, .86);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .4)
 }
 
 #homeButton:active {
     transition-duration: inherit;
-    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.40);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .4)
 }
 
-.fa-home::before,
 .fa-angle-left::before,
-.fa-angle-right::before {
+.fa-angle-right::before,
+.fa-home::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 .fa-angle-left,
 .fa-angle-right {
-    color: rgb(23, 90, 177);
+    color: #175ab1
 }
 
 footer {
-    /* border: 2px dashed white; */
     position: absolute;
-    padding-bottom: 0.2%;
+    padding-bottom: .2%;
     left: 0;
     bottom: 0;
     width: 100%;
-    color: white;
-    font-family: 'Righteous';
+    color: #fff;
+    font-family: Righteous;
     font-size: 12px;
     text-transform: uppercase;
-    text-align: center;
+    text-align: center
 }
 
-@media screen and (min-width: 770px) and (max-width: 1100px) {
+@media screen and (min-width:770px) and (max-width:1100px) {
     #movieGrid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr)
     }
 
     img.poster {
-        height: 330px;
+        height: 330px
     }
 
     #poster {
         width: 34%;
-        height: 90vh;
+        height: 90vh
     }
 
     #movie-infos {
         position: static;
-        margin-left: 40%;
+        margin-left: 40%
     }
 
     #body_trailer {
-        height: 339px;
+        height: 339px
     }
 
     #body_distribution {
         grid-template-columns: repeat(4, 1fr);
         row-gap: 1em;
-        column-gap: 1em;
+        column-gap: 1em
     }
 
     .actor_field {
-        height: auto;
+        height: auto
     }
 
     #actor_picture {
-        height: 180px;
+        height: 180px
     }
 
     #actor_detail {
-        padding-bottom: 0.6em;
-        height: 5em;
+        padding-bottom: .6em;
+        height: 5em
     }
 
     #actor_name {
-        margin-bottom: 0;
+        margin-bottom: 0
     }
 }
 
-@media screen and (min-width: 510px) and (max-width: 770px) {
+@media screen and (min-width:510px) and (max-width:770px) {
     #movieGrid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr)
     }
 
     img.poster {
-        height: 500px;
+        height: 500px
     }
 
     #poster {
         position: absolute;
         width: 34%;
-        height: 50vh;
+        height: 50vh
     }
 
     #movie-infos {
         position: relative;
-        margin-left: 40%;
+        margin-left: 40%
     }
 
     #body_trailer {
-        height: 200px;
+        height: 200px
     }
 
     #body_distribution {
         grid-template-columns: repeat(2, 1fr);
         row-gap: 1em;
-        column-gap: 1em;
+        column-gap: 1em
     }
 
     .actor_field {
-        height: auto;
+        height: auto
     }
 
     #actor_picture {
-        height: 230px;
+        height: 230px
     }
 
     #actor_detail {
-        padding-bottom: 0.6em;
-        height: 4em;
+        padding-bottom: .6em;
+        height: 4em
     }
 
     #actor_name {
-        margin-bottom: 0;
+        margin-bottom: 0
     }
 }
 
-@media screen and (max-width: 510px) {
+@media screen and (max-width:510px) {
     #movieGrid {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(1, 1fr)
     }
 
     img.poster {
-        height: 400px;
+        height: 400px
     }
 
     #poster {
         width: 34%;
-        height: 90vh;
+        height: 90vh
     }
 
     #movie-infos {
         position: static;
-        margin-left: 40%;
+        margin-left: 40%
     }
 
     #body_trailer {
-        height: 339px;
+        height: 339px
     }
 
     #body_distribution {
         grid-template-columns: repeat(4, 1fr);
         row-gap: 1em;
-        column-gap: 1em;
+        column-gap: 1em
     }
 
     #actor_field {
-        height: auto;
+        height: auto
     }
 
     #actor_picture {
-        height: 160px;
+        height: 160px
     }
 
     #actor_detail {
-        padding-bottom: 0.6em;
-        height: 5em;
+        padding-bottom: .6em;
+        height: 5em
     }
 
     #actor_name {
-        margin-bottom: 0;
+        margin-bottom: 0
+    }
+}
+
+@media screen and (height:804px) {
+    #poster {
+        width: 34%;
+        height: 92.6vh;
+    }
+
+    #movie-infos {
+        margin-left: 38%
+    }
+
+    #actor_picture {
+        height: 17em
     }
 }

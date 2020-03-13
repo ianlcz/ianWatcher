@@ -45,7 +45,7 @@ axios
         Helpers.id("poster").src = Helpers.posterUrl(data.poster_path)
         Helpers.id("poster").alt = `Affiche du film: ${data.title}`
         Helpers.remplirElement('title', data.title)
-        Helpers.remplirElement('release_date', `(${Helpers.getParam('yearFR')})`)
+        Helpers.remplirElement('release_date', !isNaN(Helpers.getParam('yearFR')) ? `(${Helpers.getParam('yearFR')})` : Helpers.id("release_date").style.display = "none")
         Helpers.remplirElement('genres', data.genres.map(item => item.name).join(', '))
 
         data.production_companies.map(item => {
@@ -77,8 +77,8 @@ axios
         }
 
         if (data.runtime && data.vote_average && data.budget && data.revenue) {
-            Helpers.remplirElement("runtime", data.runtime ? Helpers.formatRuntime(data.runtime) : "Aucune")
-            Helpers.remplirElement("vote_average", data.vote_average ? `${data.vote_average * 10}%` : "Aucun")
+            Helpers.remplirElement("runtime", Helpers.formatRuntime(data.runtime))
+            Helpers.remplirElement("vote_average", `${data.vote_average * 10}%`)
             Helpers.remplirElement("vote_count", `(${numeral(data.vote_count).format('0a')} votes)`)
             if (data.budget) {
                 Helpers.remplirElement("budget_value", `${numeral(data.budget * 0.91).format('0a')} €`)
@@ -119,7 +119,7 @@ axios
         const l_writer = []
         const l_composer = []
         const l_actor = []
-        
+
         const isInArray = (string, array) => {
             let result = false
             array.forEach(element => {
@@ -168,12 +168,12 @@ axios
             creator_span.innerText = l_creator.map(creator => creator.name).join(" et ")
         }
 
-        Helpers.id("creator").style.width = `${Helpers.id("creator").textContent.length * 2}%`
+        Helpers.id("creator").style.width = `${Helpers.id("creator").innerText.length === 33 ? Helpers.id("creator").innerText.length + 46 : Helpers.id("creator").innerText.length + 33}%`
         Helpers.id("creator").style.background = `linear-gradient(${new Date().getFullYear() - 1996}deg, rgba(11, 53, 109, 0.8), rgba(19, 87, 177, 0.8))`
 
         Helpers.id("creator").appendChild(creator_span)
 
-        if (l_writer.length > 0 && l_director[0].name === l_writer[0].name) {
+        if (l_writer.length > 0 && l_director.length > 0 && l_director[0].name === l_writer[0].name) {
             Helpers.id("creator").style.display = "none"
             Helpers.remplirElement("director", "Écrit et réalisé par ")
         } else {
@@ -223,11 +223,13 @@ axios
                 actorDetail.appendChild(actorName)
 
                 if (l_actor[actorIndex].character) {
-                    let actorCharacter = document.createElement("p")
-                    actorCharacter.innerText = l_actor[actorIndex].character
+                    const l_character = l_actor[actorIndex].character.split(' / ')
+                    const actorCharacter = document.createElement("p")
+                    actorCharacter.innerText = l_character.slice(0,3).join(' / ')
                     actorCharacter.id = "actor_character"
                     Helpers.id("body_distribution").appendChild(actorDiv)
                     actorDetail.appendChild(actorCharacter)
+
                 } else {
                     actorDetail.style.height = "2em"
                 }
