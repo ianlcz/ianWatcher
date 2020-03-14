@@ -81,19 +81,19 @@ axios
             Helpers.remplirElement("vote_average", `${data.vote_average * 10}%`)
             Helpers.remplirElement("vote_count", `(${numeral(data.vote_count).format('0a')} votes)`)
             if (data.budget) {
-                Helpers.remplirElement("budget_value", `${numeral(data.budget * 0.91).format('0a')} €`)
-                Helpers.remplirElement("benefits", Helpers.calculRate(data.budget, data.revenue) > 0 ? `(+${Helpers.calculRate(data.budget, data.revenue)}%)` : `(${Helpers.calculRate(data.budget, data.revenue)} %)`)
+                Helpers.remplirElement("budget_value", `${numeral(data.budget * 0.9).format('0a')} €`)
+                Helpers.remplirElement("benefits", Helpers.calculRate(data.budget * 0.9, data.revenue * 0.9) > 0 ? `(+${Helpers.calculRate(data.budget * 0.9, data.revenue * 0.9)}%)` : `(${Helpers.calculRate(data.budget * 0.9, data.revenue * 0.9)}%)`)
             } else {
                 Helpers.id("budget").style.display = "none"
                 Helpers.id("budget_value").style.display = "none"
                 Helpers.id("benefits").style.display = "none"
             }
-            Helpers.remplirElement("revenue_value", `${numeral(data.revenue * 0.91).format('0a')} €`)
+            Helpers.remplirElement("revenue_value", `${numeral(data.revenue * 0.9).format('0a')} €`)
 
-            if (Helpers.calculRate(data.budget, data.revenue) < 100) {
+            if (Helpers.calculRate(data.budget * 0.9, data.revenue * 0.9) < 100) {
                 Helpers.id("benefits").style.color = "#6D6D36"
             }
-            if (Helpers.calculRate(data.budget, data.revenue) < 50) {
+            if (Helpers.calculRate(data.budget * 0.9, data.revenue * 0.9) < 50) {
                 Helpers.id("benefits").style.color = "#6D0B36"
             }
         } else {
