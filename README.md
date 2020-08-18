@@ -9,7 +9,9 @@ Ce dépôt contient le code source d'un application bureautique de streaming vid
 ## Utilisation
 
 1. Créez dans votre répertoire racine le dossier `/Movies/movies_storage/` et ajoutez-y vos films
+
 1. Clonez le projet dans le répertoire de votre choix
+
 1. Une fois cloné, redirigez-vous vers ce dossier dans un terminal et lancez les commandes suivantes:
 
   1.`npm install` qui installera les dépendances du projet
