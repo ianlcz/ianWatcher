@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/ianlcz/ianWatcher#readme",
   "devDependencies": {
-    "electron": "^7.1.14"
+    "electron": "^7.2.4"
   },
   "dependencies": {
     "axios": "^0.19.2",
