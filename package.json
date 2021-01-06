@@ -20,7 +20,7 @@
     "electron": "^7.2.4"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "home-path": "^1.0.7",
     "numeral": "^2.0.6"
   }
